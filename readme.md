@@ -1,4 +1,5 @@
 go-Gin web服务端框架
+
 go get -u github.com/gin-gonic/gin
 
 github:https://github.com/gin-gonic/gin
@@ -15,3 +16,17 @@ github:https://github.com/go-gorm/gen
 文档:https://gorm.io/zh_CN/gen/gen_tool.html
 
 gen参考:https://blog.csdn.net/kuangshp128/article/details/131250405
+
+gin-swagger  API
+
+go get -u github.com/swaggo/swag/cmd/swag
+
+go install github.com/swaggo/swag/cmd/swag@latest
+
+go get -u github.com/swaggo/gin-swagger
+
+go get -u github.com/swaggo/files
+
+github:https://github.com/swaggo/gin-swagger
+
+访问地址:http://localhost:8080/swagger/index.html
