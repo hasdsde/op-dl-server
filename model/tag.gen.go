@@ -20,7 +20,7 @@ type Tag struct {
 	CreatedAt time.Time      `gorm:"column:created_at;comment:创建时间" json:"createdAt"`
 	UpdatedAt time.Time      `gorm:"column:updated_at;comment:更新时间" json:"updatedAt"`
 	DeletedAt gorm.DeletedAt `gorm:"column:deleted_at;type:datetime" json:"-"`
-	Sort      int64          `gorm:"column:sort;type:int(11);comment:分类" json:"sort"` // 分类
+	Sort      int64          `gorm:"column:sort;type:varchar(11);comment:分类" json:"sort"` // 分类
 }
 
 // TableName Tag's table name

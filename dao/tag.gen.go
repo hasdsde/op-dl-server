@@ -33,7 +33,7 @@ func newTag(db *gorm.DB, opts ...gen.DOOption) tag {
 	_tag.CreatedAt = field.NewTime(tableName, "created_at")
 	_tag.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_tag.DeletedAt = field.NewField(tableName, "deleted_at")
-	_tag.Sort = field.NewInt64(tableName, "sort")
+	_tag.Sort = field.NewString(tableName, "sort")
 
 	_tag.fillFieldMap()
 
@@ -50,7 +50,7 @@ type tag struct {
 	CreatedAt field.Time
 	UpdatedAt field.Time
 	DeletedAt field.Field
-	Sort      field.Int64 // 分类
+	Sort      field.String // 分类
 
 	fieldMap map[string]field.Expr
 }
@@ -73,7 +73,7 @@ func (t *tag) updateTableName(table string) *tag {
 	t.CreatedAt = field.NewTime(table, "created_at")
 	t.UpdatedAt = field.NewTime(table, "updated_at")
 	t.DeletedAt = field.NewField(table, "deleted_at")
-	t.Sort = field.NewInt64(table, "sort")
+	t.Sort = field.NewString(table, "sort")
 
 	t.fillFieldMap()
 

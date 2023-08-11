@@ -12,4 +12,44 @@ paths:
       summary: ping
       tags:
       - 测试
+  /version:
+    get:
+      description: 获取版本列表
+      parameters:
+      - description: 请输入当前页，默认第一页
+        in: query
+        name: page
+        type: integer
+      - description: 页大小
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 版本
+      tags:
+      - 版本
+  /version-with-event:
+    get:
+      description: 获取版本与版本详情
+      parameters:
+      - description: 请输入当前页，默认第一页
+        in: query
+        name: page
+        type: integer
+      - description: 页大小
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 版本和版本详情
+      tags:
+      - 版本
 swagger: "2.0"
