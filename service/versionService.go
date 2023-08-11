@@ -3,14 +3,11 @@ package service
 import (
 	"github.com/gin-gonic/gin"
 	"hasdsd.cn/op-dl-server/define"
+	"hasdsd.cn/op-dl-server/model"
 	"hasdsd.cn/op-dl-server/result"
 	"hasdsd.cn/op-dl-server/util"
 	"log"
 )
-
-var v = util.DB.Version
-var t = util.DB.Tag
-var vt = util.DB.VersionTag
 
 // GetVersions
 // @Summary 版本
@@ -24,10 +21,10 @@ func GetVersions(ctx *gin.Context) {
 
 	page, size := util.GetPageInfo(ctx)
 
-	data, count, err := v.WithContext(ctx).Order(v.ID.Desc()).FindByPage(page, size)
-	if err != nil {
-		return
-	}
+	var count int64
+	data := make([]*model.Version, 0)
+	err := util.DB.Model(&model.Version{}).Count(&count).Offset(page).Limit(size).Find(&data).Error
+
 	if err != nil {
 		log.Println("database query error")
 	}
@@ -43,14 +40,18 @@ func GetVersions(ctx *gin.Context) {
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version-with-tag [get]
 func GetVersionWithTag(ctx *gin.Context) {
-	page, size := util.GetPageInfo(ctx)
+	//page, size := util.GetPageInfo(ctx)
 	//data := make([]*define.VersionDetails, 0)
-
-	data, count, err := v.WithContext(ctx).Select(v.ALL).FindByPage(page, size)
-
-	if err != nil {
-		log.Println("database query error")
-	}
-
-	result.OkWithData(ctx, define.DataWithTotal{Data: data, Total: count})
+	//
+	//count, err := v.WithContext(ctx).
+	//	Select(v.ALL, vt.TagID).
+	//	LeftJoin(vt, vt.VersionID.EqCol(v.Num)).
+	//	ScanByPage(&data, page, size)
+	//
+	//if err != nil {
+	//	log.Println("database query error")
+	//}
+	//
+	//result.OkWithData(ctx, define.DataWithTotal{Data: data, Total: count})
+	result.Ok(ctx)
 }

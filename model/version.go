@@ -15,7 +15,7 @@ const TableNameVersion = "version"
 // Version mapped from table <version>
 type Version struct {
 	ID        int64          `gorm:"column:id;type:int(11);primaryKey;autoIncrement:true" json:"id,string"`
-	Num       int64          `gorm:"column:num;type:int(11);comment:版本号" json:"num"`                // 版本号
+	Num       int64          `gorm:"column:num;type:int(11);not null;comment:版本号" json:"num"`       // 版本号
 	StartTime time.Time      `gorm:"column:start_time;type:datetime;comment:开始时间" json:"startTime"` // 开始时间
 	EndTime   time.Time      `gorm:"column:end_time;type:datetime;comment:结束时间" json:"endTime"`     // 结束时间
 	Title     string         `gorm:"column:title;type:varchar(100);comment:标题" json:"title"`        // 标题
