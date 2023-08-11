@@ -17,6 +17,8 @@ type UserEvent struct {
 	CreatedAt time.Time      `gorm:"column:created_at;comment:创建时间" json:"createdAt"`
 	UpdatedAt time.Time      `gorm:"column:updated_at;comment:更新时间" json:"updatedAt"`
 	DeletedAt gorm.DeletedAt `gorm:"column:deleted_at;type:datetime" json:"-"`
+
+	Event *Event `gorm:"foreignKey:id;reference:event_id" json:"event"`
 }
 
 // TableName UserEvent's table name
