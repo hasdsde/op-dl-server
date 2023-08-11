@@ -46,6 +46,7 @@ func GetVersionWithTag(ctx *gin.Context) {
 	var count int64
 	err := util.DB.Model(&model.Version{}).
 		Preload("VersionTag").
+		Preload("VersionTag.Tag").
 		Count(&count).Find(&data).
 		Limit(page).Offset(size).Error
 
