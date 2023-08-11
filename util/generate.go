@@ -39,8 +39,8 @@ func main() {
 	g := gen.NewGenerator(gen.Config{
 		// 相对执行`go run`时的路径, 会自动创建目录
 
-		OutPath:      "../dao",   //curd代码的输出路径
-		ModelPkgPath: "../model", //model代码的输出路径
+		OutPath:      "./dao",   //curd代码的输出路径
+		ModelPkgPath: "./model", //model代码的输出路径
 
 		// WithDefaultQuery 生成默认查询结构体(作为全局变量使用), 即`Q`结构体和其字段(各表模型)
 		// WithoutContext 生成没有context调用限制的代码供查询

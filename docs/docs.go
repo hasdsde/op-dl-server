@@ -64,7 +64,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/version-with-event": {
+        "/version-with-tag": {
             "get": {
                 "description": "获取版本与版本详情",
                 "tags": [

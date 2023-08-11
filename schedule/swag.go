@@ -9,10 +9,11 @@ import (
 func SwagInit() {
 	command := exec.Command("swag", "init")
 
-	_, err := command.CombinedOutput()
+	res, err := command.CombinedOutput()
 	if err != nil {
-		log.Println("swag init error ", err)
+		log.Println("swag init error ", err.Error())
 	} else {
-		fmt.Println("swag init finish..")
+		fmt.Println(res)
 	}
+	fmt.Println("swag init finish..")
 }
