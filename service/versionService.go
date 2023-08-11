@@ -40,18 +40,18 @@ func GetVersions(ctx *gin.Context) {
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version-with-tag [get]
 func GetVersionWithTag(ctx *gin.Context) {
-	//page, size := util.GetPageInfo(ctx)
-	//data := make([]*define.VersionDetails, 0)
-	//
-	//count, err := v.WithContext(ctx).
-	//	Select(v.ALL, vt.TagID).
-	//	LeftJoin(vt, vt.VersionID.EqCol(v.Num)).
-	//	ScanByPage(&data, page, size)
-	//
-	//if err != nil {
-	//	log.Println("database query error")
-	//}
-	//
-	//result.OkWithData(ctx, define.DataWithTotal{Data: data, Total: count})
-	result.Ok(ctx)
+	page, size := util.GetPageInfo(ctx)
+
+	var data []model.Version
+	var count int64
+	err := util.DB.Model(&model.Version{}).
+		Preload("VersionTag").
+		Count(&count).Find(&data).
+		Limit(page).Offset(size).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+
+	result.OkWithData(ctx, define.DataWithTotal{Data: data, Total: count})
 }

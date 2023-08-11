@@ -20,8 +20,8 @@ type Version struct {
 	UpdatedAt time.Time      `gorm:"column:updated_at;comment:更新时间" json:"updatedAt"`
 	DeletedAt gorm.DeletedAt `gorm:"column:deleted_at;type:datetime" json:"-"`
 
-	VersionTag   []*VersionTag   `gorm:"foreignKey:version_id;reference:num" json:"versionTag"`
-	VersionEvent []*VersionEvent `gorm:"foreignKey:VersionNum;reference:num" json:"versionEvent"`
+	VersionTag   []*VersionTag   `gorm:"foreignKey:version_id;references:num" json:"versionTag"`
+	VersionEvent []*VersionEvent `gorm:"foreignKey:VersionNum;references:num" json:"versionEvent"`
 }
 
 // TableName Version's table name

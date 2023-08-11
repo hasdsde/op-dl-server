@@ -17,7 +17,7 @@ type VersionTag struct {
 	UpdatedAt time.Time      `gorm:"column:updated_at;comment:更新时间" json:"updatedAt"`
 	DeletedAt gorm.DeletedAt `gorm:"column:deleted_at;type:datetime" json:"-"`
 
-	Tag *Tag `gorm:"foreignKey:id;reference:tag_id" json:"tag"`
+	Tag *Tag `gorm:"foreignKey:id;references:tag_id" json:"tag"`
 }
 
 // TableName VersionTag's table name

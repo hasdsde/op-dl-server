@@ -23,7 +23,7 @@ type Event struct {
 	UpdatedAt time.Time      `gorm:"column:updated_at;comment:更新时间" json:"updatedAt"`
 	TodoNum   int64          `gorm:"column:todo_num;type:int(11);comment:todo空位" json:"todoNum"` // todo空位
 
-	EventTag []*EventTag `gorm:"foreignKey:event_id;reference:id" json:"eventTag"`
+	EventTag []*EventTag `gorm:"foreignKey:event_id;references:id" json:"eventTag"`
 }
 
 // TableName Event's table name

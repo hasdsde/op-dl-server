@@ -19,10 +19,10 @@ type User struct {
 	UpdatedAt time.Time      `gorm:"column:updated_at;comment:更新时间" json:"updatedAt"`
 	DeletedAt gorm.DeletedAt `gorm:"column:deleted_at;type:datetime" json:"-"`
 
-	UserEvent        []*UserEvent        `gorm:"foreignKey:user_id;reference:id" json:"userEvent"`
-	UserPrivate      []*UserPrivate      `gorm:"foreignKey:user_id;reference:id" json:"userPrivate"`
-	UserVersionEvent []*UserVersionEvent `gorm:"foreignKey:user_id;reference:id" json:"userVersionEvent"`
-	Daily            []*Daily            `gorm:"foreignKey:user_id;reference:id" json:"daily"`
+	UserEvent        []*UserEvent        `gorm:"foreignKey:user_id;references:id" json:"userEvent"`
+	UserPrivate      []*UserPrivate      `gorm:"foreignKey:user_id;references:id" json:"userPrivate"`
+	UserVersionEvent []*UserVersionEvent `gorm:"foreignKey:user_id;references:id" json:"userVersionEvent"`
+	Daily            []*Daily            `gorm:"foreignKey:user_id;references:id" json:"daily"`
 }
 
 // TableName User's table name
