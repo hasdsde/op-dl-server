@@ -200,6 +200,130 @@
                         }
                     }
                 }
+            },
+            "put": {
+                "description": "修改版本活动",
+                "tags": [
+                    "版本活动"
+                ],
+                "summary": "修改版本活动",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "versionNum",
+                        "name": "versionNum",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "content",
+                        "name": "content",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "level",
+                        "name": "level",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "startTime",
+                        "name": "startTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "endTime",
+                        "name": "endTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "todoNum",
+                        "name": "todoNum",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "新增版本活动",
+                "tags": [
+                    "版本活动"
+                ],
+                "summary": "新增版本活动",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "versionNum",
+                        "name": "versionNum",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "content",
+                        "name": "content",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "level",
+                        "name": "level",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "startTime",
+                        "name": "startTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "endTime",
+                        "name": "endTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "todoNum",
+                        "name": "todoNum",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         },
         "/version-event-with-tag": {

@@ -31,5 +31,8 @@ func Router() *gin.Engine {
 	//versionEvent 版本活动
 	r.GET("/version-event", service.GetVersionEvent)
 	r.GET("/version-event-with-tag", service.GetVersionEventWithTag)
+	r.POST("/version-event", service.CreateVersionEvent)
+	r.PUT("/version-event", service.UpdateVersionEvent)
+	r.POST("/version-event-delete", service.DeleteVersionEvent)
 	return r
 }

@@ -19,9 +19,7 @@ import (
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version [get]
 func GetVersions(c *gin.Context) {
-
 	page, size := util.GetPageInfo(c)
-
 	var count int64
 	data := make([]*model.Version, 0)
 	err := util.DB.Model(&model.Version{}).Count(&count).Offset(page).Limit(size).Find(&data).Error
@@ -45,10 +43,8 @@ func GetVersions(c *gin.Context) {
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version [put]
 func UpdateVersion(c *gin.Context) {
-
 	var version model.Version
 	err := c.ShouldBind(&version)
-
 	if err != nil {
 		result.FailIllegalParameter(c)
 		fmt.Println(err.Error())
@@ -75,10 +71,8 @@ func UpdateVersion(c *gin.Context) {
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version [post]
 func CreateVersion(c *gin.Context) {
-
 	var version model.Version
 	err := c.ShouldBind(&version)
-
 	if err != nil {
 		result.FailIllegalParameter(c)
 		fmt.Println(err.Error())
@@ -100,10 +94,8 @@ func CreateVersion(c *gin.Context) {
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version-delete [post]
 func DeleteVersion(c *gin.Context) {
-
 	var version model.Version
 	err := c.ShouldBind(&version)
-
 	if err != nil {
 		result.FailIllegalParameter(c)
 		fmt.Println(err.Error())
@@ -140,7 +132,6 @@ func GetVersionWithTag(c *gin.Context) {
 	if err != nil {
 		log.Println("database query error", err.Error())
 	}
-
 	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
 }
 
@@ -153,9 +144,7 @@ func GetVersionWithTag(c *gin.Context) {
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version-with-tag-delete [post]
 func DeleteVersionWithTag(c *gin.Context) {
-
 	var versionTag model.VersionTag
-
 	err := c.ShouldBind(&versionTag)
 
 	fmt.Println(&versionTag)
@@ -169,6 +158,5 @@ func DeleteVersionWithTag(c *gin.Context) {
 	if err != nil {
 		log.Println("database query error", err.Error())
 	}
-
 	result.Ok(c)
 }

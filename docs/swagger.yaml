@@ -130,6 +130,88 @@ paths:
       summary: 根据版本获取版本活动
       tags:
       - 版本活动
+    post:
+      description: 新增版本活动
+      parameters:
+      - description: versionNum
+        in: formData
+        name: versionNum
+        type: integer
+      - description: title
+        in: formData
+        name: title
+        type: string
+      - description: content
+        in: formData
+        name: content
+        type: string
+      - description: level
+        in: formData
+        name: level
+        type: integer
+      - description: startTime
+        in: formData
+        name: startTime
+        type: string
+      - description: endTime
+        in: formData
+        name: endTime
+        type: string
+      - description: todoNum
+        in: formData
+        name: todoNum
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 新增版本活动
+      tags:
+      - 版本活动
+    put:
+      description: 修改版本活动
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        type: integer
+      - description: versionNum
+        in: formData
+        name: versionNum
+        type: integer
+      - description: title
+        in: formData
+        name: title
+        type: string
+      - description: content
+        in: formData
+        name: content
+        type: string
+      - description: level
+        in: formData
+        name: level
+        type: integer
+      - description: startTime
+        in: formData
+        name: startTime
+        type: string
+      - description: endTime
+        in: formData
+        name: endTime
+        type: string
+      - description: todoNum
+        in: formData
+        name: todoNum
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 修改版本活动
+      tags:
+      - 版本活动
   /version-event-with-tag:
     get:
       description: 获取版本活动和tag
