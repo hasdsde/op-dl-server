@@ -144,58 +144,31 @@ func GetVersionWithTag(c *gin.Context) {
 	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
 }
 
-// GetVersionEvent
-// @Summary 根据版本获取版本活动
-// @Description 获取版本活动
-// @Tags 版本活动
-// @param version_num query int false "version_num"
+// DeleteVersionWithTag
+// @Summary 删除版本和版本与Tag
+// @Description 删除获取版本与Tag
+// @Tags 版本
+// @param tagId query int false "请输入当前页，默认第一页"
+// @param versionId query int false "请输入当前页，默认第一页"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
-// @Router /version-event [get]
-func GetVersionEvent(c *gin.Context) {
+// @Router /version-with-tag-delete [post]
+func DeleteVersionWithTag(c *gin.Context) {
 
-	versionNum := c.Query("version_num")
-	if versionNum == "" {
+	var versionTag model.VersionTag
+
+	err := c.ShouldBind(&versionTag)
+
+	fmt.Println(&versionTag)
+	if err != nil {
 		result.FailIllegalParameter(c)
+		fmt.Println(err.Error())
 		return
 	}
-	var data []*model.VersionEvent
-	err := util.DB.
-		Model(&model.VersionEvent{}).
-		Where("version_num=?", versionNum).
-		Find(&data).Error
+	util.DB.Model(&model.VersionTag{}).Where("tag_id=? AND version_id=?", versionTag.TagID, versionTag.VersionID).Delete(&versionTag)
 
 	if err != nil {
-		result.FailNormalError(c, "sql error"+err.Error())
-		return
+		log.Println("database query error", err.Error())
 	}
-	result.OkWithData(c, data)
-}
 
-// GetVersionEventWithTag
-// @Summary 根据版本获取版本活动和tag
-// @Description 获取版本活动和tag
-// @Tags 版本活动
-// @param version_num query int false "version_num"
-// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
-// @Router /version-event-with-tag [get]
-func GetVersionEventWithTag(c *gin.Context) {
-
-	versionNum := c.Query("version_num")
-	if versionNum == "" {
-		result.FailIllegalParameter(c)
-		return
-	}
-	var data []*model.VersionEvent
-	err := util.DB.
-		Model(&model.VersionEvent{}).
-		Where("version_num=?", versionNum).
-		Preload("VersionEventTag").
-		Preload("VersionEventTag.Tag").
-		Find(&data).Error
-
-	if err != nil {
-		result.FailNormalError(c, "sql error"+err.Error())
-		return
-	}
-	result.OkWithData(c, data)
+	result.Ok(c)
 }

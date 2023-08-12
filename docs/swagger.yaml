@@ -166,4 +166,24 @@ paths:
       summary: 版本和版本与Tag
       tags:
       - 版本
+  /version-with-tag-delete:
+    post:
+      description: 删除获取版本与Tag
+      parameters:
+      - description: 请输入当前页，默认第一页
+        in: query
+        name: tagId
+        type: integer
+      - description: 请输入当前页，默认第一页
+        in: query
+        name: versionId
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 删除版本和版本与Tag
+      tags:
+      - 版本
 swagger: "2.0"

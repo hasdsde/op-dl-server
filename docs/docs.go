@@ -269,6 +269,37 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/version-with-tag-delete": {
+            "post": {
+                "description": "删除获取版本与Tag",
+                "tags": [
+                    "版本"
+                ],
+                "summary": "删除版本和版本与Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "tagId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "versionId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     }
 }`
