@@ -25,5 +25,7 @@ func Router() *gin.Engine {
 	r.GET("/version", service.GetVersions)
 	r.GET("/version-with-tag", service.GetVersionWithTag)
 
+	r.GET("/version-event", service.GetVersionEvent)
+	r.GET("/version-event-with-tag", service.GetVersionEventWithTag)
 	return r
 }

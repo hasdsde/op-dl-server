@@ -53,3 +53,7 @@ func FailWithMsg(c *gin.Context, code int, msg string) {
 func FailIllegalParameter(c *gin.Context) {
 	Result(c, -1, "illegal parameter", nil)
 }
+
+func FailNormalError(c *gin.Context, msg string) {
+	Result(c, -1, msg, nil)
+}

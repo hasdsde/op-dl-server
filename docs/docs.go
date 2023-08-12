@@ -64,13 +64,63 @@ const docTemplate = `{
                 }
             }
         },
+        "/version-event": {
+            "get": {
+                "description": "获取版本活动",
+                "tags": [
+                    "版本活动"
+                ],
+                "summary": "根据版本获取版本活动",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "version_num",
+                        "name": "version_num",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/version-event-with-tag": {
+            "get": {
+                "description": "获取版本活动和tag",
+                "tags": [
+                    "版本活动"
+                ],
+                "summary": "根据版本获取版本活动和tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "version_num",
+                        "name": "version_num",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/version-with-tag": {
             "get": {
-                "description": "获取版本与版本详情",
+                "description": "获取版本与Tag",
                 "tags": [
                     "版本"
                 ],
-                "summary": "版本和版本详情",
+                "summary": "版本和版本与Tag",
                 "parameters": [
                     {
                         "type": "integer",

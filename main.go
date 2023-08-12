@@ -2,11 +2,11 @@ package main
 
 import (
 	"hasdsd.cn/op-dl-server/router"
-	"hasdsd.cn/op-dl-server/schedule"
 )
 
 func main() {
-	schedule.SwagInit()
+	//todo:下面这个函数还是不跑
+	//schedule.SwagInit()
 	r := router.Router()
 	r.Run()
 }
