@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"hasdsd.cn/op-dl-server/define"
 	"hasdsd.cn/op-dl-server/model"
@@ -29,6 +30,92 @@ func GetVersions(c *gin.Context) {
 		log.Println("database query error")
 	}
 	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+}
+
+// UpdateVersion
+// @Summary 更新版本信息
+// @Description 更新版本信息
+// @Tags 版本
+// @param id formData int false "id"
+// @param num formData int false "num"
+// @param startTime formData string false "startTime"
+// @param endTime formData string false "endTime"
+// @param title formData string false "title"
+// @param img formData string false "Img"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /version [put]
+func UpdateVersion(c *gin.Context) {
+
+	var version model.Version
+	err := c.ShouldBind(&version)
+
+	if err != nil {
+		result.FailIllegalParameter(c)
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Println(version)
+	err = util.DB.Model(&version).Omit("created_at").Save(&version).Error
+	if err != nil {
+		result.FailNormalError(c, "update error")
+		return
+	}
+	result.Ok(c)
+}
+
+// CreateVersion
+// @Summary 新增版本信息
+// @Description 新增版本信息
+// @Tags 版本
+// @param num formData int false "num"
+// @param startTime formData string false "startTime"
+// @param endTime formData string false "endTime"
+// @param title formData string false "title"
+// @param img formData string false "Img"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /version [post]
+func CreateVersion(c *gin.Context) {
+
+	var version model.Version
+	err := c.ShouldBind(&version)
+
+	if err != nil {
+		result.FailIllegalParameter(c)
+		fmt.Println(err.Error())
+		return
+	}
+	err = util.DB.Model(&version).Create(&version).Error
+	if err != nil {
+		result.FailNormalError(c, "create error")
+		return
+	}
+	result.Ok(c)
+}
+
+// DeleteVersion
+// @Summary 删除版本
+// @Description 删除版本
+// @Tags 版本
+// @param id formData int false "id"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /version-delete [post]
+func DeleteVersion(c *gin.Context) {
+
+	var version model.Version
+	err := c.ShouldBind(&version)
+
+	if err != nil {
+		result.FailIllegalParameter(c)
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Println(version)
+	err = util.DB.Model(&version).Delete(&version).Error
+	if err != nil {
+		result.FailNormalError(c, "delete error")
+		return
+	}
+	result.Ok(c)
 }
 
 // GetVersionWithTag

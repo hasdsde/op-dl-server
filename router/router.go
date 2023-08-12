@@ -21,10 +21,13 @@ func Router() *gin.Engine {
 	//ping
 	r.GET("/ping", service.Ping)
 
-	//version
+	//version 版本
 	r.GET("/version", service.GetVersions)
+	r.PUT("/version", service.UpdateVersion)
+	r.POST("/version", service.CreateVersion)
+	r.POST("/version-delete", service.DeleteVersion)
 	r.GET("/version-with-tag", service.GetVersionWithTag)
-
+	//版本活动
 	r.GET("/version-event", service.GetVersionEvent)
 	r.GET("/version-event-with-tag", service.GetVersionEventWithTag)
 	return r

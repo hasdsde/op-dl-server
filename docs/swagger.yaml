@@ -32,6 +32,88 @@ paths:
       summary: 版本
       tags:
       - 版本
+    post:
+      description: 新增版本信息
+      parameters:
+      - description: num
+        in: formData
+        name: num
+        type: integer
+      - description: startTime
+        in: formData
+        name: startTime
+        type: string
+      - description: endTime
+        in: formData
+        name: endTime
+        type: string
+      - description: title
+        in: formData
+        name: title
+        type: string
+      - description: Img
+        in: formData
+        name: img
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 新增版本信息
+      tags:
+      - 版本
+    put:
+      description: 更新版本信息
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        type: integer
+      - description: num
+        in: formData
+        name: num
+        type: integer
+      - description: startTime
+        in: formData
+        name: startTime
+        type: string
+      - description: endTime
+        in: formData
+        name: endTime
+        type: string
+      - description: title
+        in: formData
+        name: title
+        type: string
+      - description: Img
+        in: formData
+        name: img
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 更新版本信息
+      tags:
+      - 版本
+  /version-delete:
+    post:
+      description: 删除版本
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 删除版本
+      tags:
+      - 版本
   /version-event:
     get:
       description: 获取版本活动

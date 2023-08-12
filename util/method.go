@@ -5,6 +5,7 @@ import (
 	"hasdsd.cn/op-dl-server/define"
 	"log"
 	"strconv"
+	"time"
 )
 
 // GetPageInfo 获取分页参数
@@ -19,4 +20,13 @@ func GetPageInfo(ctx *gin.Context) (int, int) {
 	}
 	page = (page - 1) * size
 	return page, size
+}
+
+// TimeFormat 字符串转时间
+func TimeFormat(str string) time.Time {
+	t, err := time.Parse(time.DateTime, str)
+	if err != nil {
+		panic(err)
+	}
+	return t
 }
