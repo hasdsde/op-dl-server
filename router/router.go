@@ -34,5 +34,6 @@ func Router() *gin.Engine {
 	r.POST("/version-event", service.CreateVersionEvent)
 	r.PUT("/version-event", service.UpdateVersionEvent)
 	r.POST("/version-event-delete", service.DeleteVersionEvent)
+	r.POST("/version-event-with-tag-delete", service.DeleteVersionEventTag)
 	return r
 }

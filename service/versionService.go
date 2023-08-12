@@ -137,10 +137,10 @@ func GetVersionWithTag(c *gin.Context) {
 
 // DeleteVersionWithTag
 // @Summary 删除版本和版本与Tag
-// @Description 删除获取版本与Tag
+// @Description 删除版本与Tag
 // @Tags 版本
-// @param tagId query int false "请输入当前页，默认第一页"
-// @param versionId query int false "请输入当前页，默认第一页"
+// @param tagId query int false "tagId"
+// @param versionId query int false "versionId"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version-with-tag-delete [post]
 func DeleteVersionWithTag(c *gin.Context) {

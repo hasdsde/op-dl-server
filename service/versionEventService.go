@@ -6,6 +6,7 @@ import (
 	"hasdsd.cn/op-dl-server/model"
 	"hasdsd.cn/op-dl-server/result"
 	"hasdsd.cn/op-dl-server/util"
+	"log"
 )
 
 // GetVersionEvent
@@ -96,7 +97,7 @@ func UpdateVersionEvent(c *gin.Context) {
 // DeleteVersionEvent
 // @Summary 删除版本活动
 // @Description 删除版本活动
-// @Tags 版本
+// @Tags 版本活动
 // @param id formData int false "id"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version-event-delete [post]
@@ -143,4 +144,29 @@ func GetVersionEventWithTag(c *gin.Context) {
 		return
 	}
 	result.OkWithData(c, data)
+}
+
+// DeleteVersionEventTag
+// @Summary 删除版本活动与Tag
+// @Description 删除版本活动与Tag
+// @Tags 版本活动
+// @param tagId query int false "tagId"
+// @param versionEventId query int false "versionEventId"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /version-event-with-tag-delete [post]
+func DeleteVersionEventTag(c *gin.Context) {
+	var data model.VersionEventTag
+	err := c.ShouldBind(&data)
+
+	if err != nil {
+		result.FailIllegalParameter(c)
+		fmt.Println(err.Error())
+		return
+	}
+	util.DB.Model(&model.VersionEventTag{}).Where("tag_id=? AND version_event_id=?", data.TagID, data.VersionEventID).Delete(&data)
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.Ok(c)
 }

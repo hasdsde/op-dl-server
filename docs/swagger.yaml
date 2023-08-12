@@ -212,6 +212,22 @@ paths:
       summary: 修改版本活动
       tags:
       - 版本活动
+  /version-event-delete:
+    post:
+      description: 删除版本活动
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 删除版本活动
+      tags:
+      - 版本活动
   /version-event-with-tag:
     get:
       description: 获取版本活动和tag
@@ -226,6 +242,26 @@ paths:
           schema:
             type: string
       summary: 根据版本获取版本活动和tag
+      tags:
+      - 版本活动
+  /version-event-with-tag-delete:
+    post:
+      description: 删除版本活动与Tag
+      parameters:
+      - description: tagId
+        in: query
+        name: tagId
+        type: integer
+      - description: versionEventId
+        in: query
+        name: versionEventId
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 删除版本活动与Tag
       tags:
       - 版本活动
   /version-with-tag:
@@ -250,13 +286,13 @@ paths:
       - 版本
   /version-with-tag-delete:
     post:
-      description: 删除获取版本与Tag
+      description: 删除版本与Tag
       parameters:
-      - description: 请输入当前页，默认第一页
+      - description: tagId
         in: query
         name: tagId
         type: integer
-      - description: 请输入当前页，默认第一页
+      - description: versionId
         in: query
         name: versionId
         type: integer

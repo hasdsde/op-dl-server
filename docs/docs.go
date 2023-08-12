@@ -338,6 +338,31 @@ const docTemplate = `{
                 }
             }
         },
+        "/version-event-delete": {
+            "post": {
+                "description": "删除版本活动",
+                "tags": [
+                    "版本活动"
+                ],
+                "summary": "删除版本活动",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/version-event-with-tag": {
             "get": {
                 "description": "获取版本活动和tag",
@@ -350,6 +375,37 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "version_num",
                         "name": "version_num",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/version-event-with-tag-delete": {
+            "post": {
+                "description": "删除版本活动与Tag",
+                "tags": [
+                    "版本活动"
+                ],
+                "summary": "删除版本活动与Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "tagId",
+                        "name": "tagId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "versionEventId",
+                        "name": "versionEventId",
                         "in": "query"
                     }
                 ],
@@ -396,7 +452,7 @@ const docTemplate = `{
         },
         "/version-with-tag-delete": {
             "post": {
-                "description": "删除获取版本与Tag",
+                "description": "删除版本与Tag",
                 "tags": [
                     "版本"
                 ],
@@ -404,13 +460,13 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "请输入当前页，默认第一页",
+                        "description": "tagId",
                         "name": "tagId",
                         "in": "query"
                     },
                     {
                         "type": "integer",
-                        "description": "请输入当前页，默认第一页",
+                        "description": "versionId",
                         "name": "versionId",
                         "in": "query"
                     }
