@@ -56,5 +56,11 @@ func Router() *gin.Engine {
 
 	r.POST("/register", service.Register)
 	r.POST("/login", service.Login)
+
+	//userVersionEvent 用户版本活动
+	r.GET("/user-version-event", service.GetUserVersionEvent)
+	r.POST("/user-version-event", service.CreateUserVersionEvent)
+	r.PUT("/user-version-event", service.UpdateUserVersionEvent)
+	r.POST("/user-version-event-delete", service.DeleteUserVersionEvent)
 	return r
 }
