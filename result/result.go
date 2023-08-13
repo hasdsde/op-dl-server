@@ -54,6 +54,10 @@ func FailIllegalParameter(c *gin.Context) {
 	Result(c, -1, "illegal parameter", nil)
 }
 
+// SqlQueryError 参数非法
+func SqlQueryError(c *gin.Context) {
+	Result(c, -1, "SQL Query Error", nil)
+}
 func FailNormalError(c *gin.Context, msg string) {
 	Result(c, -1, msg, nil)
 }

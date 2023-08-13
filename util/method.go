@@ -1,7 +1,10 @@
 package util
 
 import (
+	"crypto/md5"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt"
 	"hasdsd.cn/op-dl-server/define"
 	"log"
 	"strconv"
@@ -29,4 +32,35 @@ func TimeFormat(str string) time.Time {
 		panic(err)
 	}
 	return t
+}
+
+// GenMd5 生成MD5
+func GenMd5(s string) string {
+	return fmt.Sprintf("%x", md5.Sum([]byte(s)))
+}
+
+// GenerateToken 生成Token
+func GenerateToken(userId int64, userName string, password string) (string, error) {
+	claims := jwt.MapClaims{
+		"userId":   userId,
+		"userName": userName,
+		"exp":      define.TokenExp.Unix(),
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString([]byte(password + TokenSecret))
+}
+
+// ParseToken 解析Token
+func ParseToken(token string, password string) (*jwt.Token, error) {
+	claims := jwt.MapClaims{}
+	result, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
+		return []byte(password + TokenSecret), nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	if result.Valid {
+		return result, nil
+	}
+	return nil, jwt.ValidationError{}
 }

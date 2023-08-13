@@ -48,5 +48,13 @@ func Router() *gin.Engine {
 	r.POST("/event-with-tag", service.CreateEventTag)
 	r.POST("/event-with-tag-delete", service.DeleteEventTag)
 
+	//user
+	r.GET("/user", service.GetUser)
+	r.POST("/user", service.CreateUser)
+	r.PUT("/user", service.UpdateUser)
+	r.POST("/user-delete", service.DeleteUser)
+
+	r.POST("/register", service.Register)
+	r.POST("/login", service.Login)
 	return r
 }

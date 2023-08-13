@@ -30,3 +30,9 @@ go get -u github.com/swaggo/files
 github:https://github.com/swaggo/gin-swagger
 
 访问地址:http://localhost:8080/swagger/index.html
+
+go-jwt
+go get -u github.com/golang-jwt/jwt/v5
+
+github:https://github.com/golang-jwt/jwt
+网站:https://jwt.io/
