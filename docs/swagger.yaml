@@ -327,6 +327,100 @@ paths:
       summary: 删除用户
       tags:
       - 用户
+  /user-event:
+    get:
+      description: 查询用户活动信息
+      parameters:
+      - description: userId
+        in: query
+        name: userId
+        type: integer
+      - description: eventId
+        in: query
+        name: eventId
+        type: integer
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: size
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 查询用户活动信息
+      tags:
+      - 用户活动
+    post:
+      description: 创建用户活动信息
+      parameters:
+      - description: userId
+        in: formData
+        name: userId
+        type: integer
+      - description: eventId
+        in: formData
+        name: eventId
+        type: integer
+      - description: todoNum
+        in: formData
+        name: todoNum
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 创建用户活动信息
+      tags:
+      - 用户活动
+    put:
+      description: 更新用户活动信息
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        type: integer
+      - description: userId
+        in: formData
+        name: userId
+        type: integer
+      - description: todoNum
+        in: formData
+        name: todoNum
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 更新用户活动信息
+      tags:
+      - 用户活动
+  /user-event-delete:
+    post:
+      description: 删除用户活动信息
+      parameters:
+      - description: userId
+        in: formData
+        name: userId
+        type: integer
+      - description: id
+        in: formData
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 删除用户活动信息
+      tags:
+      - 用户活动
   /user-version-event:
     get:
       description: 查询用户版本活动信息
