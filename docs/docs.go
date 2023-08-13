@@ -660,6 +660,198 @@ const docTemplate = `{
                 }
             }
         },
+        "/user-private": {
+            "get": {
+                "description": "查询用户自定义活动信息",
+                "tags": [
+                    "用户自定义活动"
+                ],
+                "summary": "查询用户自定义活动信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "size",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "更新用户自定义活动信息",
+                "tags": [
+                    "用户自定义活动"
+                ],
+                "summary": "更新用户自定义活动信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "todoNum",
+                        "name": "todoNum",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "todo",
+                        "name": "todo",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "startTime",
+                        "name": "startTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "endTime",
+                        "name": "endTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "autoUpdate",
+                        "name": "autoUpdate",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "updateHour",
+                        "name": "updateHour",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "创建用户自定义活动信息",
+                "tags": [
+                    "用户自定义活动"
+                ],
+                "summary": "创建用户自定义活动信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "todoNum",
+                        "name": "todoNum",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "todo",
+                        "name": "todo",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "startTime",
+                        "name": "startTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "endTime",
+                        "name": "endTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "autoUpdate",
+                        "name": "autoUpdate",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "updateHour",
+                        "name": "updateHour",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user-private-delete": {
+            "post": {
+                "description": "删除用户自定义活动信息",
+                "tags": [
+                    "用户自定义活动"
+                ],
+                "summary": "删除用户自定义活动信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user-version-event": {
             "get": {
                 "description": "查询用户版本活动信息",
