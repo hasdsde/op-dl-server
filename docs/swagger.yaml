@@ -1,6 +1,191 @@
 info:
   contact: {}
 paths:
+  /event:
+    get:
+      description: 获取活动列表
+      parameters:
+      - description: 请输入当前页，默认第一页
+        in: query
+        name: page
+        type: integer
+      - description: 页大小
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 活动
+      tags:
+      - 活动
+    post:
+      description: 新增活动信息
+      parameters:
+      - description: title
+        in: formData
+        name: title
+        type: string
+      - description: primogems
+        in: formData
+        name: primogems
+        type: integer
+      - description: award
+        in: formData
+        name: award
+        type: string
+      - description: preTask
+        in: formData
+        name: preTask
+        type: integer
+      - description: coPlay
+        in: formData
+        name: coPlay
+        type: integer
+      - description: todoNum
+        in: formData
+        name: todoNum
+        type: integer
+      - description: startTime
+        in: formData
+        name: startTime
+        type: string
+      - description: endTime
+        in: formData
+        name: endTime
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 新增活动信息
+      tags:
+      - 活动
+    put:
+      description: 更新活动信息
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        type: integer
+      - description: title
+        in: formData
+        name: title
+        type: string
+      - description: primogems
+        in: formData
+        name: primogems
+        type: integer
+      - description: award
+        in: formData
+        name: award
+        type: string
+      - description: preTask
+        in: formData
+        name: preTask
+        type: integer
+      - description: coPlay
+        in: formData
+        name: coPlay
+        type: integer
+      - description: todoNum
+        in: formData
+        name: todoNum
+        type: integer
+      - description: startTime
+        in: formData
+        name: startTime
+        type: string
+      - description: endTime
+        in: formData
+        name: endTime
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 更新活动信息
+      tags:
+      - 活动
+  /event-delete:
+    post:
+      description: 删除活动
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 删除活动
+      tags:
+      - 活动
+  /event-with-tag:
+    get:
+      description: 获取活动与Tag
+      parameters:
+      - description: 请输入当前页，默认第一页
+        in: query
+        name: page
+        type: integer
+      - description: 页大小
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 活动和活动与Tag
+      tags:
+      - 活动
+    post:
+      description: 创建活动与Tag
+      parameters:
+      - description: tagId
+        in: query
+        name: tagId
+        type: integer
+      - description: EventId
+        in: query
+        name: eventId
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 创建活动与Tag
+      tags:
+      - 活动
+  /event-with-tag-delete:
+    post:
+      description: 删除活动与Tag
+      parameters:
+      - description: tagId
+        in: query
+        name: tagId
+        type: integer
+      - description: eventId
+        in: query
+        name: eventId
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 删除活动和活动与Tag
+      tags:
+      - 活动
   /ping:
     get:
       description: ping
@@ -131,7 +316,7 @@ paths:
       tags:
       - 版本活动
     post:
-      description: 新增版本活动
+      description: 新增活动
       parameters:
       - description: versionNum
         in: formData
@@ -166,7 +351,7 @@ paths:
           description: '{"code":"200","msg":"","data":""}'
           schema:
             type: string
-      summary: 新增版本活动
+      summary: 新增活动
       tags:
       - 版本活动
     put:
@@ -244,6 +429,25 @@ paths:
       summary: 根据版本获取版本活动和tag
       tags:
       - 版本活动
+    post:
+      description: 创建版本活动与Tag
+      parameters:
+      - description: tagId
+        in: query
+        name: tagId
+        type: integer
+      - description: versionEventId
+        in: query
+        name: versionEventId
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 创建版本活动与Tag
+      tags:
+      - 版本活动
   /version-event-with-tag-delete:
     post:
       description: 删除版本活动与Tag
@@ -282,6 +486,25 @@ paths:
           schema:
             type: string
       summary: 版本和版本与Tag
+      tags:
+      - 版本
+    post:
+      description: 创建版本与Tag
+      parameters:
+      - description: tagId
+        in: query
+        name: tagId
+        type: integer
+      - description: versionId
+        in: query
+        name: versionId
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 创建版本与Tag
       tags:
       - 版本
   /version-with-tag-delete:

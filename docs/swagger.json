@@ -4,6 +4,289 @@
         "contact": {}
     },
     "paths": {
+        "/event": {
+            "get": {
+                "description": "获取活动列表",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "活动",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "更新活动信息",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "更新活动信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "primogems",
+                        "name": "primogems",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "award",
+                        "name": "award",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "preTask",
+                        "name": "preTask",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "coPlay",
+                        "name": "coPlay",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "todoNum",
+                        "name": "todoNum",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "startTime",
+                        "name": "startTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "endTime",
+                        "name": "endTime",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "新增活动信息",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "新增活动信息",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "primogems",
+                        "name": "primogems",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "award",
+                        "name": "award",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "preTask",
+                        "name": "preTask",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "coPlay",
+                        "name": "coPlay",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "todoNum",
+                        "name": "todoNum",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "startTime",
+                        "name": "startTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "endTime",
+                        "name": "endTime",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/event-delete": {
+            "post": {
+                "description": "删除活动",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "删除活动",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/event-with-tag": {
+            "get": {
+                "description": "获取活动与Tag",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "活动和活动与Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "创建活动与Tag",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "创建活动与Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "tagId",
+                        "name": "tagId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "EventId",
+                        "name": "eventId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/event-with-tag-delete": {
+            "post": {
+                "description": "删除活动与Tag",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "删除活动和活动与Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "tagId",
+                        "name": "tagId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "eventId",
+                        "name": "eventId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/ping": {
             "get": {
                 "description": "ping",
@@ -267,11 +550,11 @@
                 }
             },
             "post": {
-                "description": "新增版本活动",
+                "description": "新增活动",
                 "tags": [
                     "版本活动"
                 ],
-                "summary": "新增版本活动",
+                "summary": "新增活动",
                 "parameters": [
                     {
                         "type": "integer",
@@ -374,6 +657,35 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "创建版本活动与Tag",
+                "tags": [
+                    "版本活动"
+                ],
+                "summary": "创建版本活动与Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "tagId",
+                        "name": "tagId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "versionEventId",
+                        "name": "versionEventId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         },
         "/version-event-with-tag-delete": {
@@ -425,6 +737,35 @@
                         "type": "integer",
                         "description": "页大小",
                         "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "创建版本与Tag",
+                "tags": [
+                    "版本"
+                ],
+                "summary": "创建版本与Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "tagId",
+                        "name": "tagId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "versionId",
+                        "name": "versionId",
                         "in": "query"
                     }
                 ],

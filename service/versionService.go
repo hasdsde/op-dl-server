@@ -160,3 +160,29 @@ func DeleteVersionWithTag(c *gin.Context) {
 	}
 	result.Ok(c)
 }
+
+// CreateVersionTag
+// @Summary 创建版本与Tag
+// @Description 创建版本与Tag
+// @Tags 版本
+// @param tagId query int false "tagId"
+// @param versionId query int false "versionId"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /version-with-tag [post]
+func CreateVersionTag(c *gin.Context) {
+	var data model.VersionTag
+	err := c.ShouldBind(&data)
+
+	if err != nil {
+		result.FailIllegalParameter(c)
+		fmt.Println(err.Error())
+		return
+	}
+
+	err = util.DB.Model(&model.VersionTag{}).Create(&data).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.Ok(c)
+}

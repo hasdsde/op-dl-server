@@ -36,8 +36,8 @@ func GetVersionEvent(c *gin.Context) {
 }
 
 // CreateVersionEvent
-// @Summary 新增版本活动
-// @Description 新增版本活动
+// @Summary 新增活动
+// @Description 新增活动
 // @Tags 版本活动
 // @param versionNum formData int false "versionNum"
 // @param title formData string false "title"
@@ -146,6 +146,32 @@ func GetVersionEventWithTag(c *gin.Context) {
 	result.OkWithData(c, data)
 }
 
+// CreateVersionEventTag
+// @Summary 创建版本活动与Tag
+// @Description 创建版本活动与Tag
+// @Tags 版本活动
+// @param tagId query int false "tagId"
+// @param versionEventId query int false "versionEventId"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /version-event-with-tag [post]
+func CreateVersionEventTag(c *gin.Context) {
+	var data model.VersionEventTag
+	err := c.ShouldBind(&data)
+
+	if err != nil {
+		result.FailIllegalParameter(c)
+		fmt.Println(err.Error())
+		return
+	}
+
+	err = util.DB.Model(&model.VersionEventTag{}).Create(&data).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.Ok(c)
+}
+
 // DeleteVersionEventTag
 // @Summary 删除版本活动与Tag
 // @Description 删除版本活动与Tag
@@ -163,7 +189,7 @@ func DeleteVersionEventTag(c *gin.Context) {
 		fmt.Println(err.Error())
 		return
 	}
-	util.DB.Model(&model.VersionEventTag{}).Where("tag_id=? AND version_event_id=?", data.TagID, data.VersionEventID).Delete(&data)
+	err = util.DB.Model(&model.VersionEventTag{}).Where("tag_id=? AND version_event_id=?", data.TagID, data.VersionEventID).Delete(&data).Error
 
 	if err != nil {
 		log.Println("database query error", err.Error())
