@@ -36,3 +36,7 @@ go get -u github.com/golang-jwt/jwt/v5
 
 github:https://github.com/golang-jwt/jwt
 网站:https://jwt.io/
+
+米哈游相关API
+
+github:https://github.com/Huiyicc/mhyapi

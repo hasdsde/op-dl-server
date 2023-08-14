@@ -89,7 +89,7 @@ func GetUser(c *gin.Context) {
 		Count(&count).
 		Offset(page).
 		Limit(size).
-		Omit("password").
+		Omit("password", "token").
 		Find(&data).
 		Error
 	if err != nil {
@@ -144,7 +144,6 @@ func UpdateUser(c *gin.Context) {
 		fmt.Println(err.Error())
 		return
 	}
-	fmt.Println(data)
 	err = util.DB.Model(&data).Omit("created_at", "password").Save(&data).Error
 	if err != nil {
 		result.FailNormalError(c, "update error")
@@ -172,6 +171,68 @@ func DeleteUser(c *gin.Context) {
 	err = util.DB.Model(&data).Delete(&data).Error
 	if err != nil {
 		result.FailNormalError(c, "delete error")
+		return
+	}
+	result.Ok(c)
+}
+
+//TODO:代码还没测试
+
+// UpdateUserPassword
+// @Summary 修改密码
+// @Description 修改密码
+// @Tags 用户
+// @param userId formData int false "userId"
+// @param oldPassword formData int false "oldPassword"
+// @param newPassword formData int false "oldPassword"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /user-password [post]
+func UpdateUserPassword(c *gin.Context) {
+	userId := c.PostForm("userId")
+	oldPassword := c.PostForm("oldPassword")
+	newPassword := c.PostForm("newPassword")
+	if userId == "" {
+		result.FailIllegalParameter(c)
+		return
+	}
+	var data model.User
+	util.DB.Model(&model.User{}).Where("userId = ?", userId).First(&data)
+
+	if data.Password == util.GenMd5(oldPassword) {
+		err := util.DB.Model(&model.User{}).
+			Update("password = ?", util.GenMd5(newPassword)).
+			Where("user_id = ?", userId).Error
+		if err != nil {
+			result.SqlQueryError(c)
+			return
+		}
+		result.Ok(c)
+	} else {
+		result.FailNormalError(c, "old password Error")
+		return
+	}
+}
+
+// UpdateUserToken
+// @Summary 更新Token
+// @Description 更新Token
+// @Tags 用户
+// @param userId formData int false "userId"
+// @param token formData int false "oldPassword"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /user-token [post]
+func UpdateUserToken(c *gin.Context) {
+	userId := c.PostForm("userId")
+	token := c.PostForm("token")
+	if userId == "" {
+		result.FailIllegalParameter(c)
+		return
+	}
+	err := util.DB.Model(&model.User{}).
+		Where("userId = ?", userId).
+		Update("token = ?", token).Error
+	if err != nil {
+		result.SqlQueryError(c)
 		return
 	}
 	result.Ok(c)

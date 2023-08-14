@@ -68,10 +68,12 @@ func Router() *gin.Engine {
 	r.POST("/user-event", service.CreateUserEvent)
 	r.PUT("/user-event", service.UpdateUserEvent)
 	r.POST("/user-event-delete", service.DeleteUserEvent)
+
 	//用户自定义
 	r.GET("/user-private", service.GetUserPrivate)
 	r.POST("/user-private", service.CreateUserPrivate)
 	r.PUT("/user-private", service.UpdateUserPrivate)
 	r.POST("/user-private-delete", service.DeleteUserPrivate)
+
 	return r
 }
