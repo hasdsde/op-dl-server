@@ -3,6 +3,7 @@ module hasdsd.cn/op-dl-server
 go 1.20
 
 require (
+	github.com/Huiyicc/mhyapi v1.0.4
 	github.com/gin-gonic/gin v1.9.1
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/swaggo/files v1.0.1
@@ -41,6 +42,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.9 // indirect
 	github.com/rogpeppe/go-internal v1.11.0 // indirect
+	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.11 // indirect
 	golang.org/x/arch v0.4.0 // indirect

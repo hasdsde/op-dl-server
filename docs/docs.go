@@ -16,6 +16,66 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/daily": {
+            "get": {
+                "description": "获取用户每日任务",
+                "tags": [
+                    "每日任务"
+                ],
+                "summary": "每日任务",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "刷新用户每日任务",
+                "tags": [
+                    "每日任务"
+                ],
+                "summary": "刷新每日任务",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/event": {
             "get": {
                 "description": "获取活动列表",
@@ -660,6 +720,43 @@ const docTemplate = `{
                 }
             }
         },
+        "/user-password": {
+            "post": {
+                "description": "修改密码",
+                "tags": [
+                    "用户"
+                ],
+                "summary": "修改密码",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "oldPassword",
+                        "name": "oldPassword",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "oldPassword",
+                        "name": "newPassword",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user-private": {
             "get": {
                 "description": "查询用户自定义活动信息",
@@ -839,6 +936,37 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "id",
                         "name": "id",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user-token": {
+            "post": {
+                "description": "更新Token",
+                "tags": [
+                    "用户"
+                ],
+                "summary": "更新Token",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "oldPassword",
+                        "name": "token",
                         "in": "formData"
                     }
                 ],

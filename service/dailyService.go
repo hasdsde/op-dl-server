@@ -28,7 +28,7 @@ func GetUserDaily(c *gin.Context) {
 	if userId != "" {
 		tx.Where("user_id = ?", userId)
 	}
-	err := tx.Count(&count).Find(&data).Offset(page).Limit(size).Error
+	err := tx.Count(&count).Order("id desc").Offset(page).Limit(size).Find(&data).Error
 	if err != nil {
 		log.Println("database query error")
 	}
@@ -43,5 +43,44 @@ func GetUserDaily(c *gin.Context) {
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /daily [post]
 func FreshUserDaily(c *gin.Context) {
+	userId := c.Query("userId")
+	var user model.User
+	//获取用户token
+	err2 := util.DB.Model(&model.User{}).Where("user_id = ?", userId).First(&user).Error
+	if err2 != nil {
+		result.FailNormalError(c, "get user token error")
+		return
+	}
+	//根据用户token获取每日详情
+	noteInfo := util.GetDailyStatus(user.Token)
+	var data model.Daily
 
+	if noteInfo != nil {
+		data.UserID = user.ID
+		data.UID = noteInfo.GameInfo.GameUID
+		data.HomeCoin = int64(noteInfo.HomeCoin.CurrentHomeCoin)
+		data.TaskNum = int64(noteInfo.Task.FinishedTaskNum)
+		if noteInfo.Task.IsExtraTaskRewardReceived {
+			data.TaskFinished = 1
+		} else {
+			data.TaskFinished = 0
+		}
+		data.Resin = int64(noteInfo.Resin.CurrentResin)
+		data.Expeditions = int64(noteInfo.Expeditions.CurrentExpeditionNum)
+		if noteInfo.Transformer.RecoveryTime.Reached {
+			data.Transformer = 1
+		} else {
+			data.Transformer = 0
+		}
+		data.ResinDiscount = int64(noteInfo.ResinDiscount.ResinUnusedDiscountNum)
+	} else {
+		result.FailNormalError(c, "get user daily info error")
+		return
+	}
+
+	err := util.DB.Model(&model.Daily{}).Create(data).Error
+	if err != nil {
+		result.SqlQueryError(c)
+		return
+	}
 }

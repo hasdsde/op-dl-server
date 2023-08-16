@@ -6,6 +6,7 @@ import (
 	"hasdsd.cn/op-dl-server/model"
 	"hasdsd.cn/op-dl-server/result"
 	"hasdsd.cn/op-dl-server/util"
+	"time"
 )
 
 // GetUserPrivate
@@ -73,10 +74,11 @@ func UpdateUserPrivate(c *gin.Context) {
 	if data.TodoNum != 0 {
 		tx.Update("todo_num", data.TodoNum)
 	}
-	if data.StartTime != "" {
+	nilTime := time.Time{}
+	if data.StartTime != nilTime {
 		tx.Update("start_time", data.StartTime)
 	}
-	if data.EndTime != "" {
+	if data.EndTime != nilTime {
 		tx.Update("end_time", data.EndTime)
 	}
 	if data.AutoUpdate != "" {

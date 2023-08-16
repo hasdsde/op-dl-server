@@ -1,6 +1,45 @@
 info:
   contact: {}
 paths:
+  /daily:
+    get:
+      description: 获取用户每日任务
+      parameters:
+      - description: 请输入当前页，默认第一页
+        in: query
+        name: page
+        type: integer
+      - description: 页大小
+        in: query
+        name: size
+        type: integer
+      - description: userId
+        in: query
+        name: userId
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 每日任务
+      tags:
+      - 每日任务
+    post:
+      description: 刷新用户每日任务
+      parameters:
+      - description: userId
+        in: query
+        name: userId
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 刷新每日任务
+      tags:
+      - 每日任务
   /event:
     get:
       description: 获取活动列表
@@ -421,6 +460,30 @@ paths:
       summary: 删除用户活动信息
       tags:
       - 用户活动
+  /user-password:
+    post:
+      description: 修改密码
+      parameters:
+      - description: userId
+        in: formData
+        name: userId
+        type: integer
+      - description: oldPassword
+        in: formData
+        name: oldPassword
+        type: integer
+      - description: oldPassword
+        in: formData
+        name: newPassword
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 修改密码
+      tags:
+      - 用户
   /user-private:
     get:
       description: 查询用户自定义活动信息
@@ -547,6 +610,26 @@ paths:
       summary: 删除用户自定义活动信息
       tags:
       - 用户自定义活动
+  /user-token:
+    post:
+      description: 更新Token
+      parameters:
+      - description: userId
+        in: formData
+        name: userId
+        type: integer
+      - description: oldPassword
+        in: formData
+        name: token
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 更新Token
+      tags:
+      - 用户
   /user-version-event:
     get:
       description: 查询用户版本活动信息

@@ -3,6 +3,8 @@ package util
 import (
 	"crypto/md5"
 	"fmt"
+	"github.com/Huiyicc/mhyapi/genshin"
+	"github.com/Huiyicc/mhyapi/mhyapp"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 	"hasdsd.cn/op-dl-server/define"
@@ -63,4 +65,27 @@ func ParseToken(token string, password string) (*jwt.Token, error) {
 		return result, nil
 	}
 	return nil, jwt.ValidationError{}
+}
+
+// GetDailyStatus 根据token获取每日委托
+func GetDailyStatus(token string) *genshin.NoteInfo {
+
+	app := mhyapp.AppCore{}
+	if err := app.LoginToCookies(token); err != nil {
+		panic(err)
+	}
+	appCookiesStr := app.Cookies.GetStr()
+
+	genshinCore, err := genshin.NewCore(appCookiesStr)
+	if err != nil {
+		panic(err)
+	}
+
+	// genshinCore.GameInfo = *gameInfo
+	noteInfo, err := genshinCore.GetNoteInfo()
+	if err != nil {
+		fmt.Print(err.Error())
+		return nil
+	}
+	return noteInfo
 }
