@@ -407,6 +407,156 @@ const docTemplate = `{
                 }
             }
         },
+        "/pool": {
+            "get": {
+                "description": "获取卡池信息",
+                "tags": [
+                    "卡池"
+                ],
+                "summary": "获取卡池信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "size",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "获取卡池信息",
+                "tags": [
+                    "卡池"
+                ],
+                "summary": "更新卡池",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "size",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "新增卡池信息",
+                "tags": [
+                    "卡池"
+                ],
+                "summary": "新增卡池",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "versionNum",
+                        "name": "versionNum",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Img",
+                        "name": "Img",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Star",
+                        "name": "Star",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Type",
+                        "name": "Type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "StartTime",
+                        "name": "StartTime",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "EndTime",
+                        "name": "EndTime",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/pool-delete": {
+            "post": {
+                "description": "删除卡池",
+                "tags": [
+                    "卡池"
+                ],
+                "summary": "删除卡池",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/register": {
             "post": {
                 "description": "注册",

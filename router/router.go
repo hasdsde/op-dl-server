@@ -75,5 +75,14 @@ func Router() *gin.Engine {
 	r.PUT("/user-private", service.UpdateUserPrivate)
 	r.POST("/user-private-delete", service.DeleteUserPrivate)
 
+	//用户每日任务
+	r.GET("/daily", service.GetUserDaily)
+	r.POST("/daily", service.FreshUserDaily)
+
+	//卡池
+	r.GET("/pool", service.GetPool)
+	r.POST("/pool", service.UpdatePool)
+	r.PUT("/pool", service.UpdatePool)
+	r.POST("/pool-delete", service.DelPool)
 	return r
 }

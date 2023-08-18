@@ -41,7 +41,13 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	result.OkWithData(c, token)
+	result.OkWithData(c, gin.H{
+		"id":        data.ID,
+		"role":      data.Role,
+		"name":      data.Name,
+		"gameToken": data.Token,
+		"token":     token,
+	})
 }
 
 // Register
