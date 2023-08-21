@@ -347,6 +347,187 @@
                 }
             }
         },
+        "/event-with-tag-detail": {
+            "get": {
+                "description": "获取活动与Tag和详情",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "活动和活动与Tag和详情",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/eventDetail": {
+            "get": {
+                "description": "获取活动细节信息",
+                "tags": [
+                    "活动细节"
+                ],
+                "summary": "获取活动细节信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "size",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "获取活动细节信息",
+                "tags": [
+                    "活动细节"
+                ],
+                "summary": "更新活动细节",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "size",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "新增活动细节信息",
+                "tags": [
+                    "活动细节"
+                ],
+                "summary": "新增活动细节",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "versionNum",
+                        "name": "versionNum",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Img",
+                        "name": "Img",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Star",
+                        "name": "Star",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Type",
+                        "name": "Type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "StartTime",
+                        "name": "StartTime",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "EndTime",
+                        "name": "EndTime",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/eventDetail-delete": {
+            "post": {
+                "description": "删除活动细节",
+                "tags": [
+                    "活动细节"
+                ],
+                "summary": "删除活动细节",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "description": "登录",

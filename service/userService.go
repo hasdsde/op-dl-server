@@ -15,13 +15,13 @@ import (
 // @Description 登录
 // @Tags 用户
 // @param name formData string false "name"
-// @param password formData string false "name"
+// @param password formData string false "password"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /login [post]
 func Login(c *gin.Context) {
 	name := c.PostForm("name")
 	password := c.PostForm("password")
-
+	fmt.Println(name)
 	if name == "" || password == "" {
 		result.FailIllegalParameter(c)
 		return

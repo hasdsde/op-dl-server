@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"hasdsd.cn/op-dl-server/define"
 	"hasdsd.cn/op-dl-server/model"
 	"hasdsd.cn/op-dl-server/result"
 	"hasdsd.cn/op-dl-server/util"
@@ -13,26 +14,28 @@ import (
 // @Summary 根据版本获取版本活动
 // @Description 获取版本活动
 // @Tags 版本活动
+// @param page query int false "请输入当前页，默认第一页"
+// @param size query int false "页大小"
 // @param version_num query int false "version_num"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version-event [get]
 func GetVersionEvent(c *gin.Context) {
+	page, size := util.GetPageInfo(c)
 	versionNum := c.Query("version_num")
-	if versionNum == "" {
-		result.FailIllegalParameter(c)
-		return
-	}
 	var data []*model.VersionEvent
-	err := util.DB.
-		Model(&model.VersionEvent{}).
-		Where("version_num=?", versionNum).
-		Find(&data).Error
+	var count int64
+	tx := util.DB.Model(&model.VersionEvent{})
+	err := tx
+	if versionNum != "" {
+		tx.Where("version_num=?", versionNum)
+	}
+	err2 := tx.Count(&count).Offset(page).Limit(size).Find(&data).Error
 
 	if err != nil {
-		result.FailNormalError(c, "sql error"+err.Error())
+		result.FailNormalError(c, "sql error"+err2.Error())
 		return
 	}
-	result.OkWithData(c, data)
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
 }
 
 // CreateVersionEvent
@@ -123,27 +126,31 @@ func DeleteVersionEvent(c *gin.Context) {
 // @Description 获取版本活动和tag
 // @Tags 版本活动
 // @param version_num query int false "version_num"
+// @param page query int false "请输入当前页，默认第一页"
+// @param size query int false "页大小"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /version-event-with-tag [get]
 func GetVersionEventWithTag(c *gin.Context) {
+	page, size := util.GetPageInfo(c)
 	versionNum := c.Query("version_num")
-	if versionNum == "" {
-		result.FailIllegalParameter(c)
-		return
-	}
 	var data []*model.VersionEvent
-	err := util.DB.
-		Model(&model.VersionEvent{}).
-		Where("version_num=?", versionNum).
-		Preload("VersionEventTag").
-		Preload("VersionEventTag.Tag").
-		Find(&data).Error
+	var count int64
+	tx := util.DB.Model(&model.VersionEvent{})
 
-	if err != nil {
-		result.FailNormalError(c, "sql error"+err.Error())
+	if versionNum != "" {
+		tx.Where("version_num=?", versionNum)
+	}
+
+	err2 := tx.Preload("VersionEventTag").
+		Preload("VersionEventTag.Tag").
+		Count(&count).Offset(page).Limit(size).Find(&data).Error
+
+	if err2 != nil {
+		result.FailNormalError(c, "sql error"+err2.Error())
 		return
 	}
-	result.OkWithData(c, data)
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+
 }
 
 // CreateVersionEventTag

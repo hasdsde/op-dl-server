@@ -6,11 +6,28 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	_ "hasdsd.cn/op-dl-server/docs"
 	"hasdsd.cn/op-dl-server/service"
+	"net/http"
 )
 
+func Cors() gin.HandlerFunc {
+	return func(context *gin.Context) {
+		method := context.Request.Method
+
+		context.Header("Access-Control-Allow-Origin", "*")
+		context.Header("Access-Control-Allow-Headers", "Content-Type,AccessToken,X-CSRF-Token, Authorization, Token, x-token")
+		context.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PATCH, PUT")
+		context.Header("Access-Control-Expose-Headers", "Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type")
+		context.Header("Access-Control-Allow-Credentials", "true")
+
+		if method == "OPTIONS" {
+			context.AbortWithStatus(http.StatusNoContent)
+		}
+	}
+}
 func Router() *gin.Engine {
 	r := gin.Default()
 
+	r.Use(Cors())
 	//swagger
 	ginSwagger.WrapHandler(
 		swaggerFiles.Handler,
@@ -18,6 +35,7 @@ func Router() *gin.Engine {
 		ginSwagger.DefaultModelsExpandDepth(-1),
 	)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	//ping
 	r.GET("/ping", service.Ping)
 
@@ -45,6 +63,7 @@ func Router() *gin.Engine {
 	r.POST("/event", service.CreateEvent)
 	r.POST("/event-delete", service.DeleteEvent)
 	r.GET("/event-with-tag", service.GetEventWithTag)
+	r.GET("/event-with-tag-detail", service.GetEventWithTagWithEventDetail)
 	r.POST("/event-with-tag", service.CreateEventTag)
 	r.POST("/event-with-tag-delete", service.DeleteEventTag)
 
@@ -84,5 +103,11 @@ func Router() *gin.Engine {
 	r.POST("/pool", service.UpdatePool)
 	r.PUT("/pool", service.UpdatePool)
 	r.POST("/pool-delete", service.DelPool)
+
+	//活动详情
+	r.GET("/eventDetail", service.GetEventDetail)
+	r.POST("/eventDetail", service.CreateEventDetail)
+	r.PUT("/eventDetail", service.UpdateEventDetail)
+	r.POST("/eventDetail-delete", service.DelEventDetail)
 	return r
 }

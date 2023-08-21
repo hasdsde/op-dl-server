@@ -47,7 +47,7 @@ func UpdateVersion(c *gin.Context) {
 	err := c.ShouldBind(&version)
 	if err != nil {
 		result.FailIllegalParameter(c)
-		fmt.Println(err.Error())
+		fmt.Println("Error: " + err.Error())
 		return
 	}
 	fmt.Println(version)

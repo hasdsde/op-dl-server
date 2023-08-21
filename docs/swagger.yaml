@@ -225,6 +225,124 @@ paths:
       summary: 删除活动和活动与Tag
       tags:
       - 活动
+  /event-with-tag-detail:
+    get:
+      description: 获取活动与Tag和详情
+      parameters:
+      - description: 请输入当前页，默认第一页
+        in: query
+        name: page
+        type: integer
+      - description: 页大小
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 活动和活动与Tag和详情
+      tags:
+      - 活动
+  /eventDetail:
+    get:
+      description: 获取活动细节信息
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: size
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 获取活动细节信息
+      tags:
+      - 活动细节
+    post:
+      description: 新增活动细节信息
+      parameters:
+      - description: versionNum
+        in: query
+        name: versionNum
+        type: integer
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: Img
+        in: query
+        name: Img
+        type: string
+      - description: Star
+        in: query
+        name: Star
+        type: integer
+      - description: Type
+        in: query
+        name: Type
+        type: string
+      - description: StartTime
+        in: query
+        name: StartTime
+        type: integer
+      - description: EndTime
+        in: query
+        name: EndTime
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 新增活动细节
+      tags:
+      - 活动细节
+    put:
+      description: 获取活动细节信息
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: size
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 更新活动细节
+      tags:
+      - 活动细节
+  /eventDetail-delete:
+    post:
+      description: 删除活动细节
+      parameters:
+      - description: userId
+        in: formData
+        name: userId
+        type: integer
+      - description: id
+        in: formData
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 删除活动细节
+      tags:
+      - 活动细节
   /login:
     post:
       description: 登录
