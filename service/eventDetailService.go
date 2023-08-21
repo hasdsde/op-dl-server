@@ -2,6 +2,7 @@ package service
 
 import (
 	"github.com/gin-gonic/gin"
+	"hasdsd.cn/op-dl-server/define"
 	"hasdsd.cn/op-dl-server/model"
 	"hasdsd.cn/op-dl-server/result"
 	"hasdsd.cn/op-dl-server/util"
@@ -29,7 +30,7 @@ func GetEventDetail(c *gin.Context) {
 		result.SqlQueryError(c)
 		return
 	}
-	result.OkWithData(c, data)
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
 }
 
 // UpdateEventDetail
@@ -48,7 +49,7 @@ func UpdateEventDetail(c *gin.Context) {
 		return
 	}
 
-	err = util.DB.Model(&data).Save(&data).Error
+	err = util.DB.Model(&data).Omit("created_at").Save(&data).Error
 	if err != nil {
 		result.SqlQueryError(c)
 		return

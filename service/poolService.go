@@ -1,11 +1,13 @@
 package service
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"hasdsd.cn/op-dl-server/define"
 	"hasdsd.cn/op-dl-server/model"
 	"hasdsd.cn/op-dl-server/result"
 	"hasdsd.cn/op-dl-server/util"
+	"log"
 )
 
 // GetPool
@@ -30,6 +32,42 @@ func GetPool(c *gin.Context) {
 		tx.Where("end_time > ?", endTime)
 	}
 	err := tx.Count(&count).Offset(page).Limit(size).Find(&data).Error
+	if err != nil {
+		result.SqlQueryError(c)
+		return
+	}
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+}
+
+// GetPoolWithTag
+// @Summary 获取卡池信息和标签
+// @Description 获取卡池信息和标签
+// @Tags 卡池
+// @param page query int false "page"
+// @param size query int false "size"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /pool-with-tag [get]
+func GetPoolWithTag(c *gin.Context) {
+	page, size := util.GetPageInfo(c)
+	startTime := c.Query("startTime")
+	endTime := c.Query("endTime")
+	var data []*model.Pool
+	var count int64
+	tx := util.DB.Model(&model.Pool{})
+
+	if startTime != "" {
+		tx.Where("start_time < ?", startTime)
+	}
+	if endTime != "" {
+		tx.Where("end_time > ?", endTime)
+	}
+	err := tx.
+		Preload("PoolTag").
+		Preload("PoolTag.Tag").
+		Count(&count).
+		Offset(page).
+		Limit(size).
+		Find(&data).Error
 	if err != nil {
 		result.SqlQueryError(c)
 		return
@@ -109,6 +147,59 @@ func DelPool(c *gin.Context) {
 	if err != nil {
 		result.SqlQueryError(c)
 		return
+	}
+	result.Ok(c)
+}
+
+// CreatePoolTag
+// @Summary 创建Tag
+// @Description 创建Tag
+// @Tags 卡池
+// @param tagId query int false "tagId"
+// @param eventId query int false "EventId"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /pool-with-tag [post]
+func CreatePoolTag(c *gin.Context) {
+	var data model.PoolTag
+	err := c.ShouldBind(&data)
+
+	if err != nil {
+		result.FailIllegalParameter(c)
+		fmt.Println(err.Error())
+		return
+	}
+
+	err = util.DB.Model(&model.PoolTag{}).Create(&data).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.Ok(c)
+
+}
+
+// DeletePoolTag
+// @Summary 删除活Tag
+// @Description 删除Tag
+// @Tags 卡池
+// @param tagId query int false "tagId"
+// @param eventId query int false "eventId"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /pool-with-tag-delete [post]
+func DeletePoolTag(c *gin.Context) {
+	var data model.PoolTag
+	err := c.ShouldBind(&data)
+
+	fmt.Println(&data)
+	if err != nil {
+		result.FailIllegalParameter(c)
+		fmt.Println(err.Error())
+		return
+	}
+	util.DB.Model(&model.PoolTag{}).Where("tag_id=? AND pool_id=?", data.TagID, data.PoolId).Delete(&data)
+
+	if err != nil {
+		log.Println("database query error", err.Error())
 	}
 	result.Ok(c)
 }

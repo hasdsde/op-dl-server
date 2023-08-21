@@ -556,7 +556,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "name",
+                        "description": "password",
                         "name": "password",
                         "in": "formData"
                     }
@@ -738,6 +738,97 @@ const docTemplate = `{
                 }
             }
         },
+        "/pool-with-tag": {
+            "get": {
+                "description": "获取卡池信息和标签",
+                "tags": [
+                    "卡池"
+                ],
+                "summary": "获取卡池信息和标签",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "size",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "创建Tag",
+                "tags": [
+                    "卡池"
+                ],
+                "summary": "创建Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "tagId",
+                        "name": "tagId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "EventId",
+                        "name": "eventId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/pool-with-tag-delete": {
+            "post": {
+                "description": "删除Tag",
+                "tags": [
+                    "卡池"
+                ],
+                "summary": "删除活Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "tagId",
+                        "name": "tagId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "eventId",
+                        "name": "eventId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/register": {
             "post": {
                 "description": "注册",
@@ -756,6 +847,198 @@ const docTemplate = `{
                         "type": "string",
                         "description": "password",
                         "name": "password",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tag": {
+            "get": {
+                "description": "获取标签列表",
+                "tags": [
+                    "标签"
+                ],
+                "summary": "标签",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "更新标签信息",
+                "tags": [
+                    "标签"
+                ],
+                "summary": "更新标签信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "primogems",
+                        "name": "primogems",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "award",
+                        "name": "award",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "preTask",
+                        "name": "preTask",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "coPlay",
+                        "name": "coPlay",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "todoNum",
+                        "name": "todoNum",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "startTime",
+                        "name": "startTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "endTime",
+                        "name": "endTime",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "新增标签信息",
+                "tags": [
+                    "标签"
+                ],
+                "summary": "新增标签信息",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "primogems",
+                        "name": "primogems",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "award",
+                        "name": "award",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "preTask",
+                        "name": "preTask",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "coPlay",
+                        "name": "coPlay",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "todoNum",
+                        "name": "todoNum",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "startTime",
+                        "name": "startTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "endTime",
+                        "name": "endTime",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/tag-delete": {
+            "post": {
+                "description": "删除标签",
+                "tags": [
+                    "标签"
+                ],
+                "summary": "删除标签",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
                         "in": "formData"
                     }
                 ],
@@ -1621,6 +1904,18 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
                         "description": "version_num",
                         "name": "version_num",
                         "in": "query"
@@ -1797,6 +2092,18 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "version_num",
                         "name": "version_num",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
                         "in": "query"
                     }
                 ],
