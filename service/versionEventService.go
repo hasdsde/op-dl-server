@@ -153,6 +153,34 @@ func GetVersionEventWithTag(c *gin.Context) {
 
 }
 
+// GetVersionEventTag
+// @Summary 版本Tag
+// @Description 获取Tag
+// @Tags 版本活动
+// @param id query int false "id"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /versionEvent-tag [get]
+func GetVersionEventTag(c *gin.Context) {
+
+	q := c.Query("id")
+
+	if q == "" {
+		result.FailIllegalParameter(c)
+		return
+	}
+
+	var data []model.VersionEventTag
+	var count int64
+	err := util.DB.Model(&model.VersionEventTag{}).
+		Where("versionEvent_id=?", q).
+		Count(&count).Find(&data).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+}
+
 // CreateVersionEventTag
 // @Summary 创建版本活动与Tag
 // @Description 创建版本活动与Tag

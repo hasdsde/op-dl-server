@@ -15,6 +15,7 @@ import (
 // @Description 获取标签列表
 // @Tags 标签
 // @param page query int false "请输入当前页，默认第一页"
+// @param sort query string false "分类"
 // @param size query int false "页大小"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /tag [get]
@@ -22,8 +23,16 @@ func GetTag(c *gin.Context) {
 	page, size := util.GetPageInfo(c)
 	var count int64
 	data := make([]*model.Tag, 0)
+	sort := c.Query("sort")
 
-	err := util.DB.Model(&model.Tag{}).
+	tx := util.DB.Model(&model.Tag{})
+	if sort != "" {
+		if sort == "全部" {
+			sort = ""
+		}
+		tx.Where("sort = ?", sort)
+	}
+	err := tx.
 		Count(&count).
 		Offset(page).
 		Limit(size).

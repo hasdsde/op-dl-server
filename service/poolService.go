@@ -151,6 +151,34 @@ func DelPool(c *gin.Context) {
 	result.Ok(c)
 }
 
+// GetPoolTag
+// @Summary 活动Tag
+// @Description 获取Tag
+// @Tags 卡池
+// @param id query int false "id"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /pool-tag [get]
+func GetPoolTag(c *gin.Context) {
+
+	q := c.Query("id")
+
+	if q == "" {
+		result.FailIllegalParameter(c)
+		return
+	}
+
+	var data []model.PoolTag
+	var count int64
+	err := util.DB.Model(&model.PoolTag{}).
+		Where("pool_id=?", q).
+		Count(&count).Find(&data).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+}
+
 // CreatePoolTag
 // @Summary 创建Tag
 // @Description 创建Tag

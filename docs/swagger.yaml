@@ -559,6 +559,10 @@ paths:
         in: query
         name: page
         type: integer
+      - description: 分类
+        in: query
+        name: sort
+        type: string
       - description: 页大小
         in: query
         name: size
@@ -1412,24 +1416,20 @@ paths:
       summary: 删除版本活动与Tag
       tags:
       - 版本活动
-  /version-with-tag:
+  /version-tag:
     get:
-      description: 获取版本与Tag
+      description: 获取Tag
       parameters:
-      - description: 请输入当前页，默认第一页
+      - description: versionId
         in: query
-        name: page
-        type: integer
-      - description: 页大小
-        in: query
-        name: size
+        name: versionId
         type: integer
       responses:
         "200":
           description: '{"code":"200","msg":"","data":""}'
           schema:
             type: string
-      summary: 版本和版本与Tag
+      summary: 版本Tag
       tags:
       - 版本
     post:
@@ -1451,7 +1451,7 @@ paths:
       summary: 创建版本与Tag
       tags:
       - 版本
-  /version-with-tag-delete:
+  /version-tag-delete:
     post:
       description: 删除版本与Tag
       parameters:
@@ -1469,6 +1469,26 @@ paths:
           schema:
             type: string
       summary: 删除版本和版本与Tag
+      tags:
+      - 版本
+  /version-with-tag:
+    get:
+      description: 获取版本与Tag
+      parameters:
+      - description: 请输入当前页，默认第一页
+        in: query
+        name: page
+        type: integer
+      - description: 页大小
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 版本和版本与Tag
       tags:
       - 版本
 swagger: "2.0"

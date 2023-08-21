@@ -875,6 +875,12 @@ const docTemplate = `{
                         "in": "query"
                     },
                     {
+                        "type": "string",
+                        "description": "分类",
+                        "name": "sort",
+                        "in": "query"
+                    },
+                    {
                         "type": "integer",
                         "description": "页大小",
                         "name": "size",
@@ -2177,24 +2183,18 @@ const docTemplate = `{
                 }
             }
         },
-        "/version-with-tag": {
+        "/version-tag": {
             "get": {
-                "description": "获取版本与Tag",
+                "description": "获取Tag",
                 "tags": [
                     "版本"
                 ],
-                "summary": "版本和版本与Tag",
+                "summary": "版本Tag",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "请输入当前页，默认第一页",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "页大小",
-                        "name": "size",
+                        "description": "versionId",
+                        "name": "versionId",
                         "in": "query"
                     }
                 ],
@@ -2237,7 +2237,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/version-with-tag-delete": {
+        "/version-tag-delete": {
             "post": {
                 "description": "删除版本与Tag",
                 "tags": [
@@ -2255,6 +2255,37 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "versionId",
                         "name": "versionId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/version-with-tag": {
+            "get": {
+                "description": "获取版本与Tag",
+                "tags": [
+                    "版本"
+                ],
+                "summary": "版本和版本与Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
                         "in": "query"
                     }
                 ],

@@ -172,6 +172,34 @@ func GetEventWithTagWithEventDetail(c *gin.Context) {
 	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
 }
 
+// GetEventTag
+// @Summary 活动Tag
+// @Description 获取Tag
+// @Tags 活动
+// @param id query int false "id"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /event-tag [get]
+func GetEventTag(c *gin.Context) {
+
+	q := c.Query("id")
+
+	if q == "" {
+		result.FailIllegalParameter(c)
+		return
+	}
+
+	var data []model.EventTag
+	var count int64
+	err := util.DB.Model(&model.EventTag{}).
+		Where("event_id=?", q).
+		Count(&count).Find(&data).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+}
+
 // CreateEventTag
 // @Summary 创建活动与Tag
 // @Description 创建活动与Tag

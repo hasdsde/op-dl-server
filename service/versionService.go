@@ -135,15 +135,43 @@ func GetVersionWithTag(c *gin.Context) {
 	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
 }
 
-// DeleteVersionWithTag
+// GetVersionTag
+// @Summary 版本Tag
+// @Description 获取Tag
+// @Tags 版本
+// @param id query int false "id"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /version-tag [get]
+func GetVersionTag(c *gin.Context) {
+
+	versionId := c.Query("id")
+
+	if versionId == "" {
+		result.FailIllegalParameter(c)
+		return
+	}
+
+	var data []model.VersionTag
+	var count int64
+	err := util.DB.Model(&model.VersionTag{}).
+		Where("version_id=?", versionId).
+		Count(&count).Find(&data).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+}
+
+// DeleteVersionTag
 // @Summary 删除版本和版本与Tag
 // @Description 删除版本与Tag
 // @Tags 版本
 // @param tagId query int false "tagId"
 // @param versionId query int false "versionId"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
-// @Router /version-with-tag-delete [post]
-func DeleteVersionWithTag(c *gin.Context) {
+// @Router /version-tag-delete [post]
+func DeleteVersionTag(c *gin.Context) {
 	var versionTag model.VersionTag
 	err := c.ShouldBind(&versionTag)
 
@@ -168,7 +196,7 @@ func DeleteVersionWithTag(c *gin.Context) {
 // @param tagId query int false "tagId"
 // @param versionId query int false "versionId"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
-// @Router /version-with-tag [post]
+// @Router /version-tag [post]
 func CreateVersionTag(c *gin.Context) {
 	var data model.VersionTag
 	err := c.ShouldBind(&data)

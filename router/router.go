@@ -49,8 +49,10 @@ func Router() *gin.Engine {
 	r.POST("/version", service.CreateVersion)
 	r.POST("/version-delete", service.DeleteVersion)
 	r.GET("/version-with-tag", service.GetVersionWithTag)
-	r.POST("/version-with-tag", service.CreateVersionTag)
-	r.POST("/version-with-tag-delete", service.DeleteVersionWithTag)
+
+	r.GET("/version-tag", service.GetVersionTag)
+	r.POST("/version-tag", service.CreateVersionTag)
+	r.POST("/version-tag-delete", service.DeleteVersionTag)
 
 	//versionEvent 版本活动
 	r.GET("/version-event", service.GetVersionEvent)
@@ -58,8 +60,10 @@ func Router() *gin.Engine {
 	r.PUT("/version-event", service.UpdateVersionEvent)
 	r.POST("/version-event-delete", service.DeleteVersionEvent)
 	r.GET("/version-event-with-tag", service.GetVersionEventWithTag)
-	r.POST("/version-event-with-tag", service.CreateVersionEventTag)
-	r.POST("/version-event-with-tag-delete", service.DeleteVersionEventTag)
+
+	r.GET("/version-event-tag", service.GetVersionEventTag)
+	r.POST("/version-event-tag", service.CreateVersionEventTag)
+	r.POST("/version-event-tag-delete", service.DeleteVersionEventTag)
 
 	//event 限时活动
 	r.GET("/event", service.GetEvent)
@@ -68,8 +72,10 @@ func Router() *gin.Engine {
 	r.POST("/event-delete", service.DeleteEvent)
 	r.GET("/event-with-tag-detail", service.GetEventWithTagWithEventDetail)
 	r.GET("/event-with-tag", service.GetEventWithTag)
-	r.POST("/event-with-tag", service.CreateEventTag)
-	r.POST("/event-with-tag-delete", service.DeleteEventTag)
+
+	r.GET("/event-tag", service.GetEventTag)
+	r.POST("/event-tag", service.CreateEventTag)
+	r.POST("/event-tag-delete", service.DeleteEventTag)
 
 	//目前用不上
 	//user
@@ -109,8 +115,10 @@ func Router() *gin.Engine {
 	r.PUT("/pool", service.UpdatePool)
 	r.POST("/pool-delete", service.DelPool)
 	r.GET("/pool-with-tag", service.GetPoolWithTag)
-	r.POST("/pool-with-tag", service.CreatePoolTag)
-	r.POST("/pool-with-tag-delete", service.DeletePoolTag)
+
+	r.GET("/pool-tag", service.GetPoolTag)
+	r.POST("/pool-tag", service.CreatePoolTag)
+	r.POST("/pool-tag-delete", service.DeletePoolTag)
 
 	//活动详情 eventDetail
 	r.GET("/eventDetail", service.GetEventDetail)
