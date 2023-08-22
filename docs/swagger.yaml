@@ -166,6 +166,22 @@ paths:
       summary: 删除活动
       tags:
       - 活动
+  /event-tag:
+    get:
+      description: 获取Tag
+      parameters:
+      - description: id
+        in: query
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 活动Tag
+      tags:
+      - 活动
   /event-with-tag:
     get:
       description: 获取活动与Tag
@@ -470,6 +486,22 @@ paths:
           schema:
             type: string
       summary: 删除卡池
+      tags:
+      - 卡池
+  /pool-tag:
+    get:
+      description: 获取Tag
+      parameters:
+      - description: id
+        in: query
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 活动Tag
       tags:
       - 卡池
   /pool-with-tag:
@@ -1420,9 +1452,9 @@ paths:
     get:
       description: 获取Tag
       parameters:
-      - description: versionId
+      - description: id
         in: query
-        name: versionId
+        name: id
         type: integer
       responses:
         "200":
@@ -1491,4 +1523,20 @@ paths:
       summary: 版本和版本与Tag
       tags:
       - 版本
+  /versionEvent-tag:
+    get:
+      description: 获取Tag
+      parameters:
+      - description: id
+        in: query
+        name: id
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg":"","data":""}'
+          schema:
+            type: string
+      summary: 版本Tag
+      tags:
+      - 版本活动
 swagger: "2.0"

@@ -268,6 +268,31 @@ const docTemplate = `{
                 }
             }
         },
+        "/event-tag": {
+            "get": {
+                "description": "获取Tag",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "活动Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/event-with-tag": {
             "get": {
                 "description": "获取活动与Tag",
@@ -726,6 +751,31 @@ const docTemplate = `{
                         "description": "id",
                         "name": "id",
                         "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/pool-tag": {
+            "get": {
+                "description": "获取Tag",
+                "tags": [
+                    "卡池"
+                ],
+                "summary": "活动Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -2193,8 +2243,8 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "versionId",
-                        "name": "versionId",
+                        "description": "id",
+                        "name": "id",
                         "in": "query"
                     }
                 ],
@@ -2286,6 +2336,31 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "页大小",
                         "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/versionEvent-tag": {
+            "get": {
+                "description": "获取Tag",
+                "tags": [
+                    "版本活动"
+                ],
+                "summary": "版本Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
                         "in": "query"
                     }
                 ],

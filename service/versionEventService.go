@@ -172,7 +172,7 @@ func GetVersionEventTag(c *gin.Context) {
 	var data []model.VersionEventTag
 	var count int64
 	err := util.DB.Model(&model.VersionEventTag{}).
-		Where("versionEvent_id=?", q).
+		Where("version_event_id=?", q).
 		Count(&count).Find(&data).Error
 
 	if err != nil {
