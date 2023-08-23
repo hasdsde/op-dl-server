@@ -26,10 +26,10 @@ func GetTag(c *gin.Context) {
 	sort := c.Query("sort")
 
 	tx := util.DB.Model(&model.Tag{})
+	if sort == "全部" {
+		sort = ""
+	}
 	if sort != "" {
-		if sort == "全部" {
-			sort = ""
-		}
 		tx.Where("sort = ?", sort)
 	}
 	err := tx.

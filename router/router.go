@@ -49,6 +49,7 @@ func Router() *gin.Engine {
 	r.POST("/version", service.CreateVersion)
 	r.POST("/version-delete", service.DeleteVersion)
 	r.GET("/version-with-tag", service.GetVersionWithTag)
+	r.GET("/current-version-with-tag", service.GetCurrentVersionWithTag)
 
 	r.GET("/version-tag", service.GetVersionTag)
 	r.POST("/version-tag", service.CreateVersionTag)

@@ -8,6 +8,7 @@ import (
 	"hasdsd.cn/op-dl-server/result"
 	"hasdsd.cn/op-dl-server/util"
 	"log"
+	"time"
 )
 
 // GetVersions
@@ -124,6 +125,32 @@ func GetVersionWithTag(c *gin.Context) {
 	var data []model.Version
 	var count int64
 	err := util.DB.Model(&model.Version{}).
+		Preload("VersionTag").
+		Preload("VersionTag.Tag").
+		Count(&count).Find(&data).
+		Limit(page).Offset(size).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+}
+
+// GetCurrentVersionWithTag
+// @Summary 当前版本和版本与Tag
+// @Description 当前获取版本与Tag
+// @Tags 版本
+// @param page query int false "请输入当前页，默认第一页"
+// @param size query int false "页大小"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /current-version-with-tag [get]
+func GetCurrentVersionWithTag(c *gin.Context) {
+	page, size := util.GetPageInfo(c)
+
+	var data []model.Version
+	var count int64
+	err := util.DB.Model(&model.Version{}).
+		Where("end_time > ? and start_time < ?", time.Now(), time.Now()).
 		Preload("VersionTag").
 		Preload("VersionTag.Tag").
 		Count(&count).Find(&data).

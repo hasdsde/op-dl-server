@@ -12,6 +12,7 @@ type Pool struct {
 	VersionNum int64     `gorm:"column:version_num;type:int(11);comment:版本号" json:"versionNum" form:"versionNum"` // 版本号
 	Name       string    `gorm:"column:name;type:varchar(100);comment:名字" json:"name" form:"name"`                // 名字
 	Img        string    `gorm:"column:img;type:varchar(256);comment:图片" json:"img" form:"img"`                   // 图片
+	Other      string    `gorm:"column:other;type:varchar(256);comment:其他" json:"other" form:"other"`             // 图片
 	Star       string    `gorm:"column:star;type:int(11);comment:星级" json:"star" form:"star"`                     // 星级
 	Type       string    `gorm:"column:type;varchar(11);comment:type" json:"type" form:"type"`                    // 类型
 	StartTime  time.Time `gorm:"column:start_time;type:datetime;comment:开始时间" json:"startTime" form:"startTime"`  // 开始时间

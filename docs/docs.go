@@ -16,6 +16,37 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/current-version-with-tag": {
+            "get": {
+                "description": "获取版本与Tag",
+                "tags": [
+                    "版本"
+                ],
+                "summary": "版本和版本与Tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/daily": {
             "get": {
                 "description": "获取用户每日任务",
