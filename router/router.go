@@ -32,6 +32,7 @@ func Router() *gin.Engine {
 		fmt.Print("proxy error:" + err.Error())
 	}
 	r.Use(Cors())
+
 	//swagger
 	ginSwagger.WrapHandler(
 		swaggerFiles.Handler,
@@ -61,6 +62,7 @@ func Router() *gin.Engine {
 	r.PUT("/version-event", service.UpdateVersionEvent)
 	r.POST("/version-event-delete", service.DeleteVersionEvent)
 	r.GET("/version-event-with-tag", service.GetVersionEventWithTag)
+	r.GET("/current-version-event-with-tag", service.GetCurrentVersionEventWithTag)
 
 	r.GET("/version-event-tag", service.GetVersionEventTag)
 	r.POST("/version-event-tag", service.CreateVersionEventTag)
@@ -73,6 +75,7 @@ func Router() *gin.Engine {
 	r.POST("/event-delete", service.DeleteEvent)
 	r.GET("/event-with-tag-detail", service.GetEventWithTagWithEventDetail)
 	r.GET("/event-with-tag", service.GetEventWithTag)
+	r.GET("/current-event-with-tag-detail", service.GetCurrentEventWithTagWithEventDetail)
 
 	r.GET("/event-tag", service.GetEventTag)
 	r.POST("/event-tag", service.CreateEventTag)
@@ -116,6 +119,7 @@ func Router() *gin.Engine {
 	r.PUT("/pool", service.UpdatePool)
 	r.POST("/pool-delete", service.DelPool)
 	r.GET("/pool-with-tag", service.GetPoolWithTag)
+	r.GET("/current-pool-with-tag", service.GetCurrentWithPoolTag)
 
 	r.GET("/pool-tag", service.GetPoolTag)
 	r.POST("/pool-tag", service.CreatePoolTag)

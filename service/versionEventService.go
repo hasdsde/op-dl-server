@@ -153,6 +153,39 @@ func GetVersionEventWithTag(c *gin.Context) {
 
 }
 
+// GetCurrentVersionEventWithTag
+// @Summary 获取当前版本活动和tag
+// @Description 获取当前版本活动和tag
+// @Tags 版本活动
+// @param version_num query int false "version_num"
+// @param page query int false "请输入当前页，默认第一页"
+// @param size query int false "页大小"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /current-version-event-with-tag [get]
+func GetCurrentVersionEventWithTag(c *gin.Context) {
+	page, size := util.GetPageInfo(c)
+	versionNum := c.Query("version_num")
+	var data []*model.VersionEvent
+	var count int64
+	tx := util.DB.Model(&model.VersionEvent{})
+
+	if versionNum != "" {
+		tx.Where("version_num=?", versionNum)
+	}
+
+	err2 := tx.Where("end_time > ? and start_time < ?", util.GetLocalTime(), util.GetLocalTime()).
+		Preload("VersionEventTag").
+		Preload("VersionEventTag.Tag").
+		Count(&count).Offset(page).Limit(size).Find(&data).Error
+
+	if err2 != nil {
+		result.FailNormalError(c, "sql error"+err2.Error())
+		return
+	}
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+
+}
+
 // GetVersionEventTag
 // @Summary 版本Tag
 // @Description 获取Tag

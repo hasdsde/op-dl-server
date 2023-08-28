@@ -16,13 +16,112 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/current-event-with-tag-detail": {
+            "get": {
+                "description": "当前获取活动与Tag和详情",
+                "tags": [
+                    "活动"
+                ],
+                "summary": "当前活动和活动与Tag和详情",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/current-pool-with-tag": {
+            "get": {
+                "description": "获取当前卡池信息和标签",
+                "tags": [
+                    "卡池"
+                ],
+                "summary": "获取当前卡池信息和标签",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "size",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/current-version-event-with-tag": {
+            "get": {
+                "description": "获取当前版本活动和tag",
+                "tags": [
+                    "版本活动"
+                ],
+                "summary": "获取当前版本活动和tag",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "version_num",
+                        "name": "version_num",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "请输入当前页，默认第一页",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页大小",
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\":\"\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/current-version-with-tag": {
             "get": {
-                "description": "获取版本与Tag",
+                "description": "当前获取版本与Tag",
                 "tags": [
                     "版本"
                 ],
-                "summary": "版本和版本与Tag",
+                "summary": "当前版本和版本与Tag",
                 "parameters": [
                     {
                         "type": "integer",

@@ -75,6 +75,35 @@ func GetPoolWithTag(c *gin.Context) {
 	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
 }
 
+// GetCurrentWithPoolTag
+// @Summary 获取当前卡池信息和标签
+// @Description 获取当前卡池信息和标签
+// @Tags 卡池
+// @param page query int false "page"
+// @param size query int false "size"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /current-pool-with-tag [get]
+func GetCurrentWithPoolTag(c *gin.Context) {
+	page, size := util.GetPageInfo(c)
+	var data []*model.Pool
+	var count int64
+	tx := util.DB.Model(&model.Pool{})
+
+	err := tx.
+		Where("end_time > ? and start_time < ?", util.GetLocalTime(), util.GetLocalTime()).
+		Preload("PoolTag").
+		Preload("PoolTag.Tag").
+		Count(&count).
+		Offset(page).
+		Limit(size).
+		Find(&data).Error
+	if err != nil {
+		result.SqlQueryError(c)
+		return
+	}
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+}
+
 // UpdatePool
 // @Summary 更新卡池
 // @Description 获取卡池信息

@@ -8,7 +8,6 @@ import (
 	"hasdsd.cn/op-dl-server/result"
 	"hasdsd.cn/op-dl-server/util"
 	"log"
-	"time"
 )
 
 // GetVersions
@@ -150,7 +149,7 @@ func GetCurrentVersionWithTag(c *gin.Context) {
 	var data []model.Version
 	var count int64
 	err := util.DB.Model(&model.Version{}).
-		Where("end_time > ? and start_time < ?", time.Now(), time.Now()).
+		Where("end_time > ? and start_time < ?", util.GetLocalTime(), util.GetLocalTime()).
 		Preload("VersionTag").
 		Preload("VersionTag.Tag").
 		Count(&count).Find(&data).

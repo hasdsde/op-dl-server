@@ -1,6 +1,8 @@
 package define
 
-import "time"
+import (
+	"time"
+)
 
 var (
 	DefaultPage = "1"

@@ -172,6 +172,33 @@ func GetEventWithTagWithEventDetail(c *gin.Context) {
 	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
 }
 
+// GetCurrentEventWithTagWithEventDetail
+// @Summary 当前活动和活动与Tag和详情
+// @Description 当前获取活动与Tag和详情
+// @Tags 活动
+// @param page query int false "请输入当前页，默认第一页"
+// @param size query int false "页大小"
+// @Success 200 {string} json "{"code":"200","msg":"","data":""}"
+// @Router /current-event-with-tag-detail [get]
+func GetCurrentEventWithTagWithEventDetail(c *gin.Context) {
+	page, size := util.GetPageInfo(c)
+
+	var data []model.Event
+	var count int64
+	err := util.DB.Model(&model.Event{}).
+		Where("end_time > ? and start_time < ?", util.GetLocalTime(), util.GetLocalTime()).
+		Preload("EventTag").
+		Preload("EventTag.Tag").
+		Preload("EventDetail").
+		Count(&count).Find(&data).
+		Limit(page).Offset(size).Error
+
+	if err != nil {
+		log.Println("database query error", err.Error())
+	}
+	result.OkWithData(c, define.DataWithTotal{Data: data, Total: count})
+}
+
 // GetEventTag
 // @Summary 活动Tag
 // @Description 获取Tag
