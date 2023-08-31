@@ -21,7 +21,6 @@ import (
 func Login(c *gin.Context) {
 	name := c.PostForm("name")
 	password := c.PostForm("password")
-	fmt.Println(name)
 	if name == "" || password == "" {
 		result.FailIllegalParameter(c)
 		return

@@ -247,7 +247,6 @@ func DeletePoolTag(c *gin.Context) {
 	var data model.PoolTag
 	err := c.ShouldBind(&data)
 
-	fmt.Println(&data)
 	if err != nil {
 		result.FailIllegalParameter(c)
 		fmt.Println(err.Error())

@@ -93,6 +93,5 @@ func GetDailyStatus(token string) *genshin.NoteInfo {
 // 东八区时间
 func GetLocalTime() string {
 	LocalTime, _ := time.LoadLocation("Asia/Shanghai")
-	fmt.Println(time.Now().In(LocalTime))
 	return time.Now().In(LocalTime).String()
 }
