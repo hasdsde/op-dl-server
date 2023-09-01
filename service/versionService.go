@@ -141,6 +141,7 @@ func GetVersionWithTag(c *gin.Context) {
 // @Tags 版本
 // @param page query int false "请输入当前页，默认第一页"
 // @param size query int false "页大小"
+// @param time query int false "time"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /current-version-with-tag [get]
 func GetCurrentVersionWithTag(c *gin.Context) {
@@ -148,8 +149,13 @@ func GetCurrentVersionWithTag(c *gin.Context) {
 
 	var data []model.Version
 	var count int64
-	err := util.DB.Model(&model.Version{}).
-		Where("end_time > ? and start_time < ?", util.GetLocalTime(), util.GetLocalTime()).
+	tx := util.DB.Model(&model.Version{})
+
+	//时间筛选
+	tx = util.QueryWithTime(tx, c)
+
+	//外键和分页
+	err := tx.
 		Preload("VersionTag").
 		Preload("VersionTag.Tag").
 		Count(&count).Find(&data).

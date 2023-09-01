@@ -7,6 +7,7 @@ import (
 	"github.com/Huiyicc/mhyapi/mhyapp"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
+	"gorm.io/gorm"
 	"hasdsd.cn/op-dl-server/define"
 	"log"
 	"strconv"
@@ -25,6 +26,25 @@ func GetPageInfo(ctx *gin.Context) (int, int) {
 	}
 	page = (page - 1) * size
 	return page, size
+}
+
+// QueryWithTime 额外时间筛选查询
+// 当前0,当前和已结束-1,当前和未开始1,其余是2
+// 当前时间在任何情况下都加载，问就是底层代码
+// 谁会专门挑已经结束的活动看啊
+func QueryWithTime(tx *gorm.DB, c *gin.Context) *gorm.DB {
+	//当前0,当前和已结束-1,当前和未开始1
+	t := c.Query("time")
+
+	if t == "0" {
+		return tx.Where("end_time > ? and start_time < ?", GetLocalTime(), GetLocalTime())
+	} else if t == "-1" {
+		return tx.Where("start_time < ?", GetLocalTime())
+	} else if t == "1" {
+		return tx.Where("end_time > ?", GetLocalTime())
+	} else {
+		return tx
+	}
 }
 
 // TimeFormat 字符串转时间
@@ -90,7 +110,7 @@ func GetDailyStatus(token string) *genshin.NoteInfo {
 	return noteInfo
 }
 
-// 东八区时间
+// GetLocalTime 东八区时间
 func GetLocalTime() string {
 	LocalTime, _ := time.LoadLocation("Asia/Shanghai")
 	return time.Now().In(LocalTime).String()

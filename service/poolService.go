@@ -79,18 +79,29 @@ func GetPoolWithTag(c *gin.Context) {
 // @Summary 获取当前卡池信息和标签
 // @Description 获取当前卡池信息和标签
 // @Tags 卡池
+// @param versionId query int false "versionId"
+// @param time query int false "time"
 // @param page query int false "page"
 // @param size query int false "size"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /current-pool-with-tag [get]
 func GetCurrentWithPoolTag(c *gin.Context) {
+	//当前0,当前和已结束-1,当前和未开始1,其余全部
 	page, size := util.GetPageInfo(c)
+	versionId := c.Query("versionId")
 	var data []*model.Pool
 	var count int64
 	tx := util.DB.Model(&model.Pool{})
 
+	//版本判断
+	if versionId != "" {
+		tx.Where("version_num = ?", versionId)
+	}
+	//时间筛选
+	tx = util.QueryWithTime(tx, c)
+
+	//外键
 	err := tx.
-		Where("end_time > ? and start_time < ?", util.GetLocalTime(), util.GetLocalTime()).
 		Preload("PoolTag").
 		Preload("PoolTag.Tag").
 		Count(&count).
