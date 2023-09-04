@@ -113,7 +113,7 @@ func Router() *gin.Engine {
 	r.GET("/daily", service.GetUserDaily)
 	r.POST("/daily", service.FreshUserDaily)
 
-	//卡池 Pool
+	//Pool 卡池
 	r.GET("/pool", service.GetPool)
 	r.POST("/pool", service.UpdatePool)
 	r.PUT("/pool", service.UpdatePool)

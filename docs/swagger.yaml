@@ -25,6 +25,14 @@ paths:
     get:
       description: 获取当前卡池信息和标签
       parameters:
+      - description: versionId
+        in: query
+        name: versionId
+        type: integer
+      - description: time
+        in: query
+        name: time
+        type: integer
       - description: page
         in: query
         name: page
@@ -76,6 +84,10 @@ paths:
       - description: 页大小
         in: query
         name: size
+        type: integer
+      - description: time
+        in: query
+        name: time
         type: integer
       responses:
         "200":
@@ -336,6 +348,10 @@ paths:
       - description: 页大小
         in: query
         name: size
+        type: integer
+      - description: time
+        in: query
+        name: time
         type: integer
       responses:
         "200":
@@ -1475,7 +1491,7 @@ paths:
       parameters:
       - description: version_num
         in: query
-        name: version_num
+        name: versionId
         type: integer
       - description: 请输入当前页，默认第一页
         in: query
@@ -1492,7 +1508,7 @@ paths:
             type: string
       summary: 根据版本获取版本活动和tag
       tags:
-      - 版本活动
+      - 版本活动w
     post:
       description: 创建版本活动与Tag
       parameters:

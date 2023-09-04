@@ -30,12 +30,18 @@ func GetPageInfo(ctx *gin.Context) (int, int) {
 
 // QueryWithTime 额外时间筛选查询
 // 当前0,当前和已结束-1,当前和未开始1,其余是2
-// 当前时间在任何情况下都加载，问就是底层代码
+// 当前时间在任何情况下都加载，问就是底层代码"
 // 谁会专门挑已经结束的活动看啊
 func QueryWithTime(tx *gorm.DB, c *gin.Context) *gorm.DB {
 	//当前0,当前和已结束-1,当前和未开始1
 	t := c.Query("time")
 
+	//没有就算当前
+	if t == "" {
+		t = "0"
+	}
+
+	//默认获取当前
 	if t == "0" {
 		return tx.Where("end_time > ? and start_time < ?", GetLocalTime(), GetLocalTime())
 	} else if t == "-1" {

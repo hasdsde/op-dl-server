@@ -57,6 +57,18 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "integer",
+                        "description": "versionId",
+                        "name": "versionId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "time",
+                        "name": "time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
                         "description": "page",
                         "name": "page",
                         "in": "query"
@@ -133,6 +145,12 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "页大小",
                         "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "time",
+                        "name": "time",
                         "in": "query"
                     }
                 ],
@@ -532,6 +550,12 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "页大小",
                         "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "time",
+                        "name": "time",
                         "in": "query"
                     }
                 ],
@@ -2270,14 +2294,14 @@ const docTemplate = `{
             "get": {
                 "description": "获取版本活动和tag",
                 "tags": [
-                    "版本活动"
+                    "版本活动w"
                 ],
                 "summary": "根据版本获取版本活动和tag",
                 "parameters": [
                     {
                         "type": "integer",
                         "description": "version_num",
-                        "name": "version_num",
+                        "name": "versionId",
                         "in": "query"
                     },
                     {
