@@ -153,6 +153,7 @@ func GetEventWithTag(c *gin.Context) {
 // @param page query int false "请输入当前页，默认第一页"
 // @param size query int false "页大小"
 // @param time query int false "time"
+// @param versionId query int false "versionId"
 // @Success 200 {string} json "{"code":"200","msg":"","data":""}"
 // @Router /event-with-tag-detail [get]
 func GetEventWithTagWithEventDetail(c *gin.Context) {
@@ -162,11 +163,12 @@ func GetEventWithTagWithEventDetail(c *gin.Context) {
 	var count int64
 	tx := util.DB.Model(&model.Event{})
 
+	versionId := c.Query("versionId")
 	//时间筛选
 	tx = util.QueryWithTime(tx, c)
 
 	//外键和分页
-	err := tx.
+	err := tx.Where("version_num = ?", versionId).
 		Preload("EventTag").
 		Preload("EventTag.Tag").
 		Preload("EventDetail").
